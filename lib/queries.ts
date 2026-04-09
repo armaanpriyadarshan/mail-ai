@@ -230,6 +230,8 @@ export function useStartCampaign() {
         .update({ status: "sending" })
         .eq("id", campaignId);
       if (error) throw error;
+      // Kick off send-batch immediately instead of waiting for pg_cron.
+      supabase.functions.invoke("send-batch", { body: {} }).catch(() => {});
     },
     onSuccess: (_d, id) => {
       qc.invalidateQueries({ queryKey: ["campaign", id] });
