@@ -1,20 +1,35 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Alert } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
 import { ProgressBar } from "@/components/ProgressBar";
-import { useCampaign, useRecipients } from "@/lib/queries";
+import { useCampaign, useRecipients, useStartCampaign, usePersonalizeEmails } from "@/lib/queries";
 
 export default function CampaignDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { data: campaign } = useCampaign(id);
   const { data: recipients } = useRecipients(id);
+  const start = useStartCampaign();
+  const personalize = usePersonalizeEmails();
 
   const total = recipients?.length ?? 0;
   const sent = (recipients ?? []).filter((r) => r.status === "sent").length;
   const failed = (recipients ?? []).filter((r) => r.status === "failed").length;
+
+  const onSend = async () => {
+    if (!campaign || !id) return;
+    try {
+      if (campaign.ai_personalize) {
+        await personalize.mutateAsync({ campaign_id: id });
+      }
+      await start.mutateAsync(id);
+    } catch (e: any) {
+      Alert.alert("Couldn't start sending", e?.message ?? "Try again.");
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-paper" edges={["top", "left", "right"]}>
@@ -39,6 +54,14 @@ export default function CampaignDetail() {
           <ProgressBar value={sent} total={total || 1} />
         </Card>
       </View>
+
+      {campaign?.status === "draft" && (
+        <View className="px-card mt-4">
+          <Button onPress={onSend} loading={start.isPending || personalize.isPending}>
+            Send campaign
+          </Button>
+        </View>
+      )}
 
       <FlatList
         data={recipients ?? []}

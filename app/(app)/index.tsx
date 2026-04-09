@@ -24,12 +24,21 @@ function statusLabel(s: Campaign["status"]) {
   }[s];
 }
 
+type Tab = "active" | "history";
+
+const ACTIVE_STATUSES: Campaign["status"][] = ["draft", "sending", "paused"];
+
 export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
   const { data: campaigns, isLoading, refetch } = useCampaigns(user?.id);
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
+  const [tab, setTab] = useState<Tab>("active");
+
+  const active = campaigns?.filter((c) => ACTIVE_STATUSES.includes(c.status)) ?? [];
+  const history = campaigns?.filter((c) => !ACTIVE_STATUSES.includes(c.status)) ?? [];
+  const visible = tab === "active" ? active : history;
 
   // Realtime: invalidate recipient counts whenever any recipient for one of
   // the user's campaigns flips status. The filter scopes the subscription to
@@ -37,8 +46,9 @@ export default function Home() {
   useEffect(() => {
     if (!campaigns || campaigns.length === 0) return;
     const ids = campaigns.map((c) => c.id);
+    const channelName = `home-recipients-${ids.sort().join(",")}`;
     const channel = supabase
-      .channel("home-recipients")
+      .channel(channelName)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "recipients" },
@@ -83,6 +93,22 @@ export default function Home() {
         }
       />
 
+      {!isLoading && (campaigns?.length ?? 0) > 0 && (
+        <View className="flex-row px-card mb-2 gap-2">
+          {(["active", "history"] as Tab[]).map((t) => (
+            <Pressable
+              key={t}
+              onPress={() => setTab(t)}
+              className={`px-4 py-2 rounded-full ${tab === t ? "bg-accent" : "bg-line"}`}
+            >
+              <Text className={`text-sm font-medium ${tab === t ? "text-white" : "text-muted"}`}>
+                {t === "active" ? `Active (${active.length})` : `History (${history.length})`}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
+
       <ScrollView
         contentContainerStyle={{ paddingBottom: 120 }}
         keyboardShouldPersistTaps="handled"
@@ -101,9 +127,15 @@ export default function Home() {
               </View>
             }
           />
+        ) : visible.length === 0 ? (
+          <View className="px-card pt-8 items-center">
+            <Text className="text-muted text-base">
+              {tab === "active" ? "No active campaigns" : "No completed campaigns yet"}
+            </Text>
+          </View>
         ) : (
           <View className="px-card gap-4 pt-2">
-            {campaigns?.map((c, i) => (
+            {visible.map((c, i) => (
               <CampaignCard key={c.id} c={c} delay={i * 60} />
             ))}
           </View>
