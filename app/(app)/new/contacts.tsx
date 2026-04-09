@@ -6,8 +6,10 @@ import { Screen } from "@/components/Screen";
 import { WizardProgress } from "@/components/WizardProgress";
 import { TextField } from "@/components/TextField";
 import { Button } from "@/components/Button";
+import { BottomSheet } from "@/components/BottomSheet";
 import { useDraft } from "@/lib/draft-store";
-import { useSearchLeads, useGuessEmails } from "@/lib/queries";
+import { useSearchLeads, useGuessEmails, useProfile, useCreateCheckout } from "@/lib/queries";
+import { useAuth } from "@/lib/auth-store";
 import type { Lead } from "@/lib/types";
 
 type Mode = "manual" | "search" | "guess";
@@ -132,10 +134,10 @@ function FieldsEditor() {
 // ---- Mode tabs -------------------------------------------------------------
 
 function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }) {
-  const tabs: { key: Mode; label: string }[] = [
+  const tabs: { key: Mode; label: string; premium?: boolean }[] = [
     { key: "manual", label: "I have a list" },
-    { key: "search", label: "Find with AI" },
     { key: "guess", label: "Guess emails" },
+    { key: "search", label: "Find with AI", premium: true },
   ];
   return (
     <View className="flex-row bg-card border border-line rounded-card p-1">
@@ -147,11 +149,21 @@ function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void 
             onPress={() => onChange(t.key)}
             className={`flex-1 py-3 rounded-card ${active ? "bg-accent" : ""}`}
           >
-            <Text
-              className={`text-center text-sm ${active ? "text-white font-medium" : "text-muted"}`}
-            >
-              {t.label}
-            </Text>
+            <View className="flex-row items-center justify-center">
+              <Text
+                className={`text-center text-sm ${active ? "text-white font-medium" : "text-muted"}`}
+              >
+                {t.label}
+              </Text>
+              {t.premium ? (
+                <Ionicons
+                  name="diamond"
+                  size={12}
+                  color={active ? "#ffffff" : "#E26A2C"}
+                  style={{ marginLeft: 4 }}
+                />
+              ) : null}
+            </View>
           </Pressable>
         );
       })}
@@ -225,11 +237,21 @@ function ManualMode() {
 // ---- Apollo search ---------------------------------------------------------
 
 function SearchMode() {
+  const { user } = useAuth();
+  const { data: profile } = useProfile(user?.id);
   const draft = useDraft();
   const [query, setQuery] = useState("");
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
   const search = useSearchLeads();
+  const checkout = useCreateCheckout();
+
+  const isFree = (profile?.subscription_tier ?? "free") === "free";
 
   const run = async () => {
+    if (isFree) {
+      setUpgradeOpen(true);
+      return;
+    }
     if (!query.trim()) return;
     try {
       const res = await search.mutateAsync({ query });
@@ -247,6 +269,37 @@ function SearchMode() {
       }
     }
   };
+
+  const onUpgrade = async () => {
+    try {
+      const { url } = await checkout.mutateAsync();
+      if (url) {
+        const WebBrowser = await import("expo-web-browser");
+        await WebBrowser.openBrowserAsync(url);
+      }
+    } catch (e: any) {
+      Alert.alert("Couldn't start checkout", e?.message ?? "Try again.");
+    }
+  };
+
+  if (isFree) {
+    return (
+      <View>
+        <View className="bg-card border border-line rounded-card p-6 items-center">
+          <Ionicons name="diamond" size={32} color="#E26A2C" style={{ marginBottom: 12 }} />
+          <Text className="text-ink text-lg font-medium text-center mb-2">
+            Pro feature
+          </Text>
+          <Text className="text-muted text-sm text-center leading-6 mb-5">
+            Find contacts automatically using AI-powered search. Upgrade to Pro to unlock.
+          </Text>
+          <Button onPress={onUpgrade} loading={checkout.isPending}>
+            Upgrade to Pro
+          </Button>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View>
