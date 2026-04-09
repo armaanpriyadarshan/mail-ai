@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import * as AuthSession from "expo-auth-session";
 import { Screen } from "@/components/Screen";
 import { TextField } from "@/components/TextField";
 import { Button } from "@/components/Button";
 import { supabase } from "@/lib/supabase";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,10 +27,43 @@ export default function SignIn() {
     if (error) Alert.alert("Hmm", error.message);
   };
 
-  // Google OAuth — provisional. Real flow needs supabase.auth.signInWithOAuth
-  // wired to a deep link redirect. Stubbed for now.
-  const google = () => {
-    Alert.alert("Coming soon", "Google sign-in isn't wired up yet.");
+  const google = async () => {
+    setLoading(true);
+    try {
+      const expoUsername = process.env.EXPO_PUBLIC_EXPO_USERNAME ?? "";
+      const redirectTo = AuthSession.makeRedirectUri({
+        projectNameForProxy: expoUsername ? `@${expoUsername}/mail-ai` : undefined,
+      });
+
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo, skipBrowserRedirect: true },
+      });
+      if (error) throw error;
+      if (!data?.url) throw new Error("no auth url");
+
+      const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
+      if (result.type !== "success" || !result.url) {
+        return; // user closed the sheet
+      }
+
+      // Supabase returns tokens in the URL fragment.
+      const fragment = result.url.split("#")[1] ?? "";
+      const params = new URLSearchParams(fragment);
+      const access_token = params.get("access_token");
+      const refresh_token = params.get("refresh_token");
+      if (!access_token || !refresh_token) throw new Error("missing tokens in callback");
+
+      const { error: setErr } = await supabase.auth.setSession({
+        access_token,
+        refresh_token,
+      });
+      if (setErr) throw setErr;
+    } catch (e: any) {
+      Alert.alert("Sign-in failed", e?.message ?? "Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +71,7 @@ export default function SignIn() {
       <View className="px-card pt-24 pb-8">
         <Text className="text-4xl font-serif text-ink">Mail AI</Text>
         <Text className="text-muted text-base mt-2 leading-6">
-          Cold emails that don't feel cold.
+          Automated cold emailing with AI
         </Text>
       </View>
 
@@ -54,19 +92,42 @@ export default function SignIn() {
           placeholder="••••••••"
         />
 
-        <View className="mt-4 gap-3">
+        <View className="mt-4 gap-4">
           <Button onPress={submit} loading={loading}>
             {mode === "sign-in" ? "Sign in" : "Create account"}
           </Button>
+
+          <View className="flex-row items-center my-1">
+            <View className="flex-1 h-px bg-line" />
+            <Text className="text-muted text-sm mx-3">or</Text>
+            <View className="flex-1 h-px bg-line" />
+          </View>
+
           <Button variant="ghost" onPress={google}>
-            Continue with Google
+            <View className="flex-row items-center">
+              <Ionicons name="logo-google" size={18} color="#1F1B16" />
+              <Text className="text-ink text-base font-medium ml-3">
+                Continue with Google
+              </Text>
+            </View>
           </Button>
-          <Button
-            variant="ghost"
+
+          <Pressable
             onPress={() => setMode(mode === "sign-in" ? "sign-up" : "sign-in")}
+            className="items-center mt-2"
           >
-            {mode === "sign-in" ? "New here? Create an account" : "Have an account? Sign in"}
-          </Button>
+            <Text className="text-muted text-sm">
+              {mode === "sign-in" ? (
+                <>
+                  New here? <Text className="text-accent">Create an account</Text>
+                </>
+              ) : (
+                <>
+                  Have an account? <Text className="text-accent">Sign in</Text>
+                </>
+              )}
+            </Text>
+          </Pressable>
         </View>
       </View>
     </Screen>
