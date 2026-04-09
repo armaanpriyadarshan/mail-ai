@@ -31,7 +31,18 @@ yarn-error.*
 *.pem
 
 # local env files
-.env*.local
+.env
+.env.*
+!.env.example
+
+# editor / agent local state
+.claude/
+.agents/
+skills-lock.json
+
+# supabase CLI local state
+supabase/.temp/
+supabase/.branches/
 
 # typescript
 *.tsbuildinfo
