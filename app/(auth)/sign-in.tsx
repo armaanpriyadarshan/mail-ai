@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, Alert, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
-import * as AuthSession from "expo-auth-session";
+import * as Linking from "expo-linking";
 import { Screen } from "@/components/Screen";
 import { TextField } from "@/components/TextField";
 import { Button } from "@/components/Button";
@@ -30,10 +30,12 @@ export default function SignIn() {
   const google = async () => {
     setLoading(true);
     try {
-      const expoUsername = process.env.EXPO_PUBLIC_EXPO_USERNAME ?? "";
-      const redirectTo = AuthSession.makeRedirectUri({
-        projectNameForProxy: expoUsername ? `@${expoUsername}/mail-ai` : undefined,
-      });
+      // No Expo proxy. Linking.createURL returns the current runtime's deep link:
+      //   Expo Go → exp://<lan-ip>:8081/--/auth/callback
+      //   dev build → mailai://auth/callback
+      // Both must be allowed in Supabase (Redirect URLs supports `exp://**` and
+      // `mailai://**` wildcards).
+      const redirectTo = Linking.createURL("/auth/callback");
 
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",

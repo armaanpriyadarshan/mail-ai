@@ -61,6 +61,28 @@ export function useCampaign(id: string | undefined) {
   });
 }
 
+// Recipient counts for a single campaign — used by the home list cards.
+// Returns just { total, sent, failed } without loading full rows.
+export function useRecipientCounts(campaignId: string) {
+  return useQuery({
+    queryKey: ["recipient-counts", campaignId],
+    staleTime: 5_000,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("recipients")
+        .select("status")
+        .eq("campaign_id", campaignId);
+      if (error) throw error;
+      const rows = data ?? [];
+      return {
+        total: rows.length,
+        sent: rows.filter((r: any) => r.status === "sent").length,
+        failed: rows.filter((r: any) => r.status === "failed").length,
+      };
+    },
+  });
+}
+
 export function useRecipients(campaignId: string | undefined) {
   const qc = useQueryClient();
 
@@ -101,16 +123,39 @@ export function useRecipients(campaignId: string | undefined) {
 }
 
 // ---- edge function helpers -------------------------------------------------
+// supabase-js throws a generic "non-2xx status code" for any error response.
+// We unwrap the response body so the UI can show the real message.
 async function invoke<T>(name: string, body: unknown): Promise<T> {
   const { data, error } = await supabase.functions.invoke<T>(name, { body });
-  if (error) throw error;
+  if (error) {
+    let detail = error.message;
+    try {
+      const ctx = (error as any).context;
+      if (ctx && typeof ctx.json === "function") {
+        const body = await ctx.json();
+        if (body?.error) {
+          detail = body.details ? `${body.error}: ${body.details}` : body.error;
+        }
+      }
+    } catch {
+      // ignore — fall back to the generic message
+    }
+    throw new Error(detail);
+  }
   return data as T;
 }
 
 export function useSearchLeads() {
   return useMutation({
-    mutationFn: (input: { query: string; filters?: Record<string, unknown> }) =>
+    mutationFn: (input: { query: string }) =>
       invoke<{ leads: Lead[]; cached: boolean }>("search-leads", input),
+  });
+}
+
+export function useGuessEmails() {
+  return useMutation({
+    mutationFn: (input: { contacts: { name: string; company?: string }[] }) =>
+      invoke<{ leads: Lead[] }>("guess-emails", input),
   });
 }
 
@@ -140,7 +185,6 @@ export function useCreateCampaign(userId: string | undefined) {
   return useMutation({
     mutationFn: async (input: {
       name: string;
-      audience_query: string;
       subject_template: string;
       body_template: string;
       ai_personalize: boolean;
@@ -151,7 +195,6 @@ export function useCreateCampaign(userId: string | undefined) {
         .insert({
           user_id: userId,
           name: input.name,
-          audience_query: input.audience_query,
           subject_template: input.subject_template,
           body_template: input.body_template,
           ai_personalize: input.ai_personalize,
@@ -165,11 +208,8 @@ export function useCreateCampaign(userId: string | undefined) {
         .filter((l) => l.email)
         .map((l) => ({
           campaign_id: campaign.id,
-          email: l.email!,
-          first_name: l.first_name,
-          last_name: l.last_name,
-          company: l.company,
-          title: l.title,
+          email: l.email,
+          data: l.data ?? {},
         }));
       if (rows.length > 0) {
         const { error: rErr } = await supabase.from("recipients").insert(rows);

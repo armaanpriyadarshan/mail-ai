@@ -12,12 +12,13 @@ import { incrementUsage } from "../_shared/usage.ts";
 // Hard cap per cron tick so a single tick can't spam.
 const MAX_PER_TICK = 20;
 
-function fillTokens(template: string, r: Record<string, unknown>): string {
-  return template
-    .replaceAll("{first_name}", String(r.first_name ?? ""))
-    .replaceAll("{last_name}", String(r.last_name ?? ""))
-    .replaceAll("{company}", String(r.company ?? ""))
-    .replaceAll("{title}", String(r.title ?? ""));
+// Fill {field_name} tokens using whatever is in the recipient's data jsonb.
+// Unknown tokens collapse to empty strings rather than crash the send.
+function fillTokens(template: string, data: Record<string, unknown>): string {
+  return template.replace(/\{([a-z0-9_]+)\}/g, (_, key) => {
+    const v = data?.[key];
+    return v == null ? "" : String(v);
+  });
 }
 
 Deno.serve(async (req) => {
@@ -30,7 +31,7 @@ Deno.serve(async (req) => {
   const { data: queued } = await sb
     .from("recipients")
     .select(
-      "id, email, first_name, last_name, company, title, personalized_subject, personalized_body, campaign_id, campaigns!inner(id, user_id, status, subject_template, body_template)",
+      "id, email, data, personalized_subject, personalized_body, campaign_id, campaigns!inner(id, user_id, status, subject_template, body_template)",
     )
     .eq("status", "queued")
     .in("campaigns.status", ["sending"])
@@ -67,10 +68,11 @@ Deno.serve(async (req) => {
 
     for (const r of rows) {
       if (sentToday >= profile.daily_send_limit) break;
+      const data = ((r as any).data ?? {}) as Record<string, unknown>;
       const subject = (r as any).personalized_subject ??
-        fillTokens((r as any).campaigns.subject_template ?? "", r);
+        fillTokens((r as any).campaigns.subject_template ?? "", data);
       const body = (r as any).personalized_body ??
-        fillTokens((r as any).campaigns.body_template ?? "", r);
+        fillTokens((r as any).campaigns.body_template ?? "", data);
 
       try {
         await sendGmail(profile as any, (r as any).email, subject, body);

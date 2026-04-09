@@ -43,6 +43,8 @@ export default function CampaignDetail() {
       <FlatList
         data={recipients ?? []}
         keyExtractor={(r) => r.id}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
         contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 16, paddingBottom: 60, gap: 10 }}
         renderItem={({ item }) => (
           <View className="bg-card border border-line rounded-card p-4 flex-row justify-between items-center">

@@ -1,5 +1,6 @@
 import { View, Text, Alert, Linking } from "react-native";
 import { useRouter } from "expo-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { Screen } from "@/components/Screen";
 import { Header } from "@/components/Header";
 import { Card } from "@/components/Card";
@@ -20,14 +21,13 @@ export default function Settings() {
   const update = useUpdateProfile(user?.id);
   const checkout = useCreateCheckout();
   const gmail = useGmailConnect();
+  const queryClient = useQueryClient();
 
-  const [signature, setSignature] = useState("");
   const [limit, setLimit] = useState("50");
   const [usage, setUsage] = useState({ emails_sent: 0, leads_searched: 0 });
 
   useEffect(() => {
     if (profile) {
-      setSignature(profile.default_signature ?? "");
       setLimit(String(profile.daily_send_limit));
     }
   }, [profile]);
@@ -54,7 +54,12 @@ export default function Settings() {
 
   const onConnect = async () => {
     const res = await gmail.connect();
-    if (!res.ok) Alert.alert("Couldn't connect", "Try again from a moment.");
+    if (res.ok) {
+      await queryClient.invalidateQueries({ queryKey: ["profile", user?.id] });
+      Alert.alert("Gmail connected", `Sending as ${res.gmail_email ?? "your account"}.`);
+    } else if (res.error !== "cancelled") {
+      Alert.alert("Couldn't connect", res.error ?? "Try again in a moment.");
+    }
   };
 
   const onUpgrade = async () => {
@@ -68,7 +73,6 @@ export default function Settings() {
 
   const save = () => {
     update.mutate({
-      default_signature: signature,
       daily_send_limit: Math.max(1, Math.min(500, parseInt(limit || "50", 10))),
     });
   };
@@ -101,17 +105,6 @@ export default function Settings() {
           <Text className="text-muted text-xs mb-2">Daily send limit</Text>
           <TextField value={limit} onChangeText={setLimit} keyboardType="number-pad" />
           <Text className="text-muted text-xs mt-2">Default 50, max 500.</Text>
-        </Card>
-
-        <Card>
-          <Text className="text-muted text-xs mb-2">Default signature</Text>
-          <TextField
-            value={signature}
-            onChangeText={setSignature}
-            multiline
-            style={{ minHeight: 80, textAlignVertical: "top" }}
-            placeholder="— Your name"
-          />
         </Card>
 
         <Button onPress={save} loading={update.isPending}>

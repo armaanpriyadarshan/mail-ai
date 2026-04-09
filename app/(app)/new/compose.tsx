@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, Alert, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { Screen } from "@/components/Screen";
-import { Header } from "@/components/Header";
+import { WizardProgress } from "@/components/WizardProgress";
 import { TextField } from "@/components/TextField";
 import { Button } from "@/components/Button";
 import { Chip } from "@/components/Chip";
@@ -17,13 +17,10 @@ import {
 } from "@/lib/queries";
 import { useAuth } from "@/lib/auth-store";
 
-const TOKENS = ["{first_name}", "{company}", "{title}"];
-
-function fillTokens(template: string, r: Record<string, string | null>) {
-  return template
-    .replaceAll("{first_name}", r.first_name ?? "")
-    .replaceAll("{company}", r.company ?? "")
-    .replaceAll("{title}", r.title ?? "");
+// Client-side token substitution, used only for the preview sheet.
+// The real fill happens inside send-batch.
+function fillTokens(template: string, data: Record<string, string>) {
+  return template.replaceAll(/\{([a-z0-9_]+)\}/g, (_, key) => data[key] ?? "");
 }
 
 export default function Compose() {
@@ -40,7 +37,7 @@ export default function Compose() {
   const start = useStartCampaign();
   const personalize = usePersonalizeEmails();
 
-  const recipientCount = draft.selected.size;
+  const recipientCount = draft.leads.filter((l) => !!l.email).length;
 
   const onGenerate = async () => {
     if (!goal) return;
@@ -57,21 +54,39 @@ export default function Compose() {
     draft.set({ body: (draft.body ?? "") + " " + t });
   };
 
-  const onSend = async () => {
+  // Shared create path — used by both "Save as draft" and "Send campaign".
+  const createCampaign = async () => {
     if (!draft.subject || !draft.body) {
       Alert.alert("Almost there", "Add a subject and body first.");
-      return;
+      return null;
     }
     try {
-      const leads = draft.leads.filter((l) => l.email && draft.selected.has(l.email));
+      const leads = draft.leads.filter((l) => !!l.email);
       const campaign = await create.mutateAsync({
-        name: draft.audienceQuery.slice(0, 40) || "Untitled campaign",
-        audience_query: draft.audienceQuery,
+        name: draft.name || draft.subject.slice(0, 40) || "Untitled campaign",
         subject_template: draft.subject,
         body_template: draft.body,
         ai_personalize: draft.aiPersonalize,
         leads,
       });
+      return campaign;
+    } catch (e: any) {
+      Alert.alert("Couldn't save", e?.message ?? "Try again.");
+      return null;
+    }
+  };
+
+  const onSaveDraft = async () => {
+    const campaign = await createCampaign();
+    if (!campaign) return;
+    draft.reset();
+    router.replace("/(app)");
+  };
+
+  const onSend = async () => {
+    const campaign = await createCampaign();
+    if (!campaign) return;
+    try {
       if (draft.aiPersonalize) {
         await personalize.mutateAsync({ campaign_id: campaign.id });
       }
@@ -79,17 +94,15 @@ export default function Compose() {
       draft.reset();
       router.replace(`/(app)/campaign/${campaign.id}`);
     } catch (e: any) {
-      Alert.alert("Couldn't start", e?.message ?? "Try again.");
+      Alert.alert("Couldn't start sending", e?.message ?? "Try again.");
     }
   };
 
-  const samples = draft.leads
-    .filter((l) => l.email && draft.selected.has(l.email))
-    .slice(0, 3);
+  const samples = draft.leads.filter((l) => !!l.email).slice(0, 3);
 
   return (
     <Screen>
-      <Header title="Step 3 of 3" back={() => router.back()} />
+      <WizardProgress step={2} total={2} />
       <View className="px-card">
         <Card>
           <Text className="text-muted text-sm">To</Text>
@@ -124,9 +137,15 @@ export default function Compose() {
 
         <Text className="text-muted text-sm mt-6 mb-2">Personalization</Text>
         <View className="flex-row flex-wrap">
-          {TOKENS.map((t) => (
-            <Chip key={t} label={t} onPress={() => insertToken(t)} />
-          ))}
+          {draft.fields.length === 0 ? (
+            <Text className="text-muted text-xs">
+              Add fields on the previous step to get personalization tokens.
+            </Text>
+          ) : (
+            draft.fields.map((f) => (
+              <Chip key={f} label={`{${f}}`} onPress={() => insertToken(`{${f}}`)} />
+            ))
+          )}
         </View>
 
         <Pressable
@@ -146,6 +165,13 @@ export default function Compose() {
         <View className="gap-3">
           <Button variant="ghost" onPress={() => setPreviewOpen(true)}>
             Preview
+          </Button>
+          <Button
+            variant="secondary"
+            onPress={onSaveDraft}
+            loading={create.isPending && !start.isPending}
+          >
+            Save as draft
           </Button>
           <Button onPress={onSend} loading={create.isPending || start.isPending}>
             Send campaign →
@@ -186,9 +212,9 @@ export default function Compose() {
               <Card key={i}>
                 <Text className="text-muted text-xs mb-1">To {s.email}</Text>
                 <Text className="text-ink font-medium mb-2">
-                  {fillTokens(draft.subject, s as any)}
+                  {fillTokens(draft.subject, s.data)}
                 </Text>
-                <Text className="text-ink leading-6">{fillTokens(draft.body, s as any)}</Text>
+                <Text className="text-ink leading-6">{fillTokens(draft.body, s.data)}</Text>
               </Card>
             ))
           )}

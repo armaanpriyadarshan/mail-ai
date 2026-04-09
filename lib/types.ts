@@ -8,7 +8,6 @@ export interface Profile {
   id: string;
   gmail_email: string | null;
   daily_send_limit: number;
-  default_signature: string | null;
   subscription_tier: Tier;
   created_at: string;
 }
@@ -29,10 +28,7 @@ export interface Recipient {
   id: string;
   campaign_id: string;
   email: string;
-  first_name: string | null;
-  last_name: string | null;
-  company: string | null;
-  title: string | null;
+  data: Record<string, string>;
   personalized_subject: string | null;
   personalized_body: string | null;
   status: RecipientStatus;
@@ -40,11 +36,9 @@ export interface Recipient {
   error: string | null;
 }
 
+// A contact in the draft wizard. `data` keys are whatever the user put into
+// `draft.fields` — e.g. { first_name: "Jane", company: "Acme", recent_win: "…" }.
 export interface Lead {
-  first_name: string | null;
-  last_name: string | null;
-  email: string | null;
-  title: string | null;
-  company: string | null;
-  linkedin_url?: string | null;
+  email: string;
+  data: Record<string, string>;
 }

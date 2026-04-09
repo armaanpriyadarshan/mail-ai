@@ -1,0 +1,31 @@
+# Supabase CLI config. Controls how functions are deployed.
+# Each function has its own [functions.<name>] table — we disable platform JWT
+# verification and let the function code validate the user via supabase.auth.getUser()
+# using the forwarded Authorization header. This avoids the mismatch between the
+# legacy JWT platform check and the new sb_publishable_*/sb_secret_* key system.
+
+project_id = "ptnmlcuzrtnedbidcpqd"
+
+[functions.gmail-oauth]
+verify_jwt = false
+
+[functions.search-leads]
+verify_jwt = false
+
+[functions.generate-email]
+verify_jwt = false
+
+[functions.personalize-emails]
+verify_jwt = false
+
+[functions.guess-emails]
+verify_jwt = false
+
+[functions.send-batch]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false

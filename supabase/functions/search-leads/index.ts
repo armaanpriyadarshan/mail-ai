@@ -4,7 +4,7 @@ import { preflight, json } from "../_shared/cors.ts";
 import { adminClient, getUserId } from "../_shared/supabase.ts";
 import { getUsageAndTier, incrementUsage } from "../_shared/usage.ts";
 
-const APOLLO_URL = "https://api.apollo.io/v1/mixed_people/search";
+const APOLLO_URL = "https://api.apollo.io/api/v1/mixed_people/search";
 
 interface SearchBody {
   query: string;
@@ -28,11 +28,12 @@ Deno.serve(async (req) => {
   const pre = preflight(req);
   if (pre) return pre;
 
-  const userId = await getUserId(req);
-  if (!userId) return json({ error: "unauthorized" }, { status: 401 });
+  try {
+    const userId = await getUserId(req);
+    if (!userId) return json({ error: "unauthorized" }, { status: 401 });
 
-  const body = (await req.json().catch(() => ({}))) as SearchBody;
-  if (!body.query) return json({ error: "missing query" }, { status: 400 });
+    const body = (await req.json().catch(() => ({}))) as SearchBody;
+    if (!body.query) return json({ error: "missing query" }, { status: 400 });
 
   // Gate by tier.
   const usage = await getUsageAndTier(userId);
@@ -56,15 +57,14 @@ Deno.serve(async (req) => {
     return json({ leads: cached.results, cached: true });
   }
 
-  // Apollo call.
-  const apolloKey = Deno.env.get("APOLLO_API_KEY")!;
-  const res = await fetch(APOLLO_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Api-Key": apolloKey,
-    },
-    body: JSON.stringify({
+    // Apollo call.
+    const apolloKey = Deno.env.get("APOLLO_API_KEY");
+    if (!apolloKey) {
+      console.error("search-leads: APOLLO_API_KEY is not set");
+      return json({ error: "server misconfig", details: "APOLLO_API_KEY missing" }, { status: 500 });
+    }
+
+    const requestBody = {
       q_keywords: body.query,
       person_titles: body.filters?.job_titles,
       person_locations: body.filters?.location ? [body.filters.location] : undefined,
@@ -73,30 +73,65 @@ Deno.serve(async (req) => {
         : undefined,
       page: 1,
       per_page: body.per_page ?? 25,
-    }),
-  });
-  if (!res.ok) {
-    return json({ error: "apollo failed", details: await res.text() }, { status: 502 });
+    };
+    console.log("search-leads: calling Apollo", { query: body.query });
+
+    const res = await fetch(APOLLO_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+        "X-Api-Key": apolloKey,
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    const rawText = await res.text();
+    if (!res.ok) {
+      console.error("search-leads: apollo error", res.status, rawText);
+      return json({ error: "apollo failed", details: `${res.status} ${rawText}` }, { status: 502 });
+    }
+
+    let apollo: Record<string, unknown>;
+    try {
+      apollo = JSON.parse(rawText);
+    } catch {
+      console.error("search-leads: apollo returned non-JSON", rawText.slice(0, 200));
+      return json({ error: "apollo bad json", details: rawText.slice(0, 200) }, { status: 502 });
+    }
+
+    // Normalize. Apollo's mixed_people_search returns `people` (and sometimes `contacts`).
+    const peopleArr = ((apollo.people as any[]) ?? (apollo.contacts as any[]) ?? []);
+    console.log(`search-leads: got ${peopleArr.length} people from Apollo`);
+
+    const leads = peopleArr
+      .filter((p: any) => !!p.email)
+      .map((p: Record<string, unknown>) => {
+        const data: Record<string, string> = {};
+        if (p.first_name) data.first_name = String(p.first_name);
+        if (p.last_name) data.last_name = String(p.last_name);
+        if (p.title) data.title = String(p.title);
+        const company =
+          (p.organization as { name?: string } | undefined)?.name ??
+          (p.organization_name as string | undefined);
+        if (company) data.company = String(company);
+        return { email: String(p.email).toLowerCase(), data };
+      });
+
+    // Persist to cache + bump usage.
+    await sb.from("leads_cache").insert({
+      query_hash: queryHash,
+      query_text: body.query,
+      results: leads,
+    });
+    await incrementUsage(userId, "leads_searched", leads.length);
+
+    return json({ leads, cached: false });
+  } catch (err) {
+    console.error("search-leads: unexpected error", err);
+    return json(
+      { error: "unexpected", details: String(err instanceof Error ? err.message : err) },
+      { status: 500 },
+    );
   }
-  const apollo = await res.json();
-
-  // Normalize. Provisional shape — Apollo may return different field names.
-  const leads = (apollo.people ?? []).map((p: Record<string, unknown>) => ({
-    first_name: p.first_name,
-    last_name: p.last_name,
-    email: p.email,
-    title: p.title,
-    company: (p.organization as { name?: string } | undefined)?.name,
-    linkedin_url: p.linkedin_url,
-  }));
-
-  // Persist to cache + bump usage.
-  await sb.from("leads_cache").insert({
-    query_hash: queryHash,
-    query_text: body.query,
-    results: leads,
-  });
-  await incrementUsage(userId, "leads_searched", leads.length);
-
-  return json({ leads, cached: false });
 });

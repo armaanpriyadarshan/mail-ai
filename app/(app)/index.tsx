@@ -1,14 +1,16 @@
 import { View, Text, Pressable, RefreshControl, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "@/lib/auth-store";
-import { useCampaigns } from "@/lib/queries";
+import { useCampaigns, useRecipientCounts } from "@/lib/queries";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { EmptyState } from "@/components/EmptyState";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Header } from "@/components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import type { Campaign } from "@/lib/types";
 
@@ -26,11 +28,47 @@ export default function Home() {
   const { user } = useAuth();
   const router = useRouter();
   const { data: campaigns, isLoading, refetch } = useCampaigns(user?.id);
+  const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
+
+  // Realtime: invalidate recipient counts whenever any recipient for one of
+  // the user's campaigns flips status. The filter scopes the subscription to
+  // just the current list so we don't get updates for other users.
+  useEffect(() => {
+    if (!campaigns || campaigns.length === 0) return;
+    const ids = campaigns.map((c) => c.id);
+    const channel = supabase
+      .channel("home-recipients")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "recipients" },
+        (payload: any) => {
+          const cid = payload.new?.campaign_id ?? payload.old?.campaign_id;
+          if (cid && ids.includes(cid)) {
+            queryClient.invalidateQueries({ queryKey: ["recipient-counts", cid] });
+          }
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "campaigns" },
+        (payload: any) => {
+          if (payload.new?.user_id === user?.id) {
+            queryClient.invalidateQueries({ queryKey: ["campaigns", user?.id] });
+          }
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [campaigns, queryClient, user?.id]);
 
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
+    // Also refetch each card's counts.
+    await queryClient.invalidateQueries({ queryKey: ["recipient-counts"] });
     setRefreshing(false);
   };
 
@@ -47,6 +85,8 @@ export default function Home() {
 
       <ScrollView
         contentContainerStyle={{ paddingBottom: 120 }}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >
         {!isLoading && (campaigns?.length ?? 0) === 0 ? (
@@ -55,7 +95,7 @@ export default function Home() {
             body="Tell us who you want to reach. We'll find them and help you write."
             cta={
               <View className="w-full px-card mt-2">
-                <Button onPress={() => router.push("/(app)/new/audience")}>
+                <Button onPress={() => router.push("/(app)/new/contacts")}>
                   Start a campaign
                 </Button>
               </View>
@@ -73,11 +113,11 @@ export default function Home() {
       {(campaigns?.length ?? 0) > 0 ? (
         <View className="absolute bottom-8 right-card">
           <Pressable
-            onPress={() => router.push("/(app)/new/audience")}
+            onPress={() => router.push("/(app)/new/contacts")}
             className="bg-accent w-16 h-16 rounded-full items-center justify-center"
             style={{ shadowColor: "#000", shadowOpacity: 0.15, shadowRadius: 12, shadowOffset: { width: 0, height: 6 } }}
           >
-            <Text className="text-white text-3xl">+</Text>
+            <Ionicons name="add" size={32} color="#ffffff" />
           </Pressable>
         </View>
       ) : null}
@@ -87,20 +127,9 @@ export default function Home() {
 
 function CampaignCard({ c, delay }: { c: Campaign; delay: number }) {
   const router = useRouter();
-  const [counts, setCounts] = useState<{ total: number; sent: number } | null>(null);
-
-  // Fire-and-forget recipient counts. Cheap enough to do per card for v1.
-  if (counts === null) {
-    supabase
-      .from("recipients")
-      .select("status", { count: "exact" })
-      .eq("campaign_id", c.id)
-      .then(({ data }) => {
-        const total = data?.length ?? 0;
-        const sent = (data ?? []).filter((r: any) => r.status === "sent").length;
-        setCounts({ total, sent });
-      });
-  }
+  const { data: counts } = useRecipientCounts(c.id);
+  const total = counts?.total ?? 0;
+  const sent = counts?.sent ?? 0;
 
   return (
     <Card delay={delay} onPress={() => router.push(`/(app)/campaign/${c.id}`)}>
@@ -110,12 +139,10 @@ function CampaignCard({ c, delay }: { c: Campaign; delay: number }) {
           <Text className="text-accent text-xs">{statusLabel(c.status)}</Text>
         </View>
       </View>
-      <Text className="text-muted text-sm mb-4">
-        {counts?.total ?? "…"} recipients
-      </Text>
-      <ProgressBar value={counts?.sent ?? 0} total={counts?.total ?? 1} />
+      <Text className="text-muted text-sm mb-4">{total} recipients</Text>
+      <ProgressBar value={sent} total={total || 1} />
       <Text className="text-muted text-xs mt-2">
-        {counts?.sent ?? 0} of {counts?.total ?? 0} sent
+        {sent} of {total} sent
       </Text>
     </Card>
   );

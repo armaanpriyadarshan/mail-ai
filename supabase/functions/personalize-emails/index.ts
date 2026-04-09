@@ -42,10 +42,13 @@ Deno.serve(async (req) => {
   let updated = 0;
 
   for (const r of recipients ?? []) {
+    // Flatten the recipient's data jsonb into a readable list for the prompt.
+    const dataLines = Object.entries((r as any).data ?? {})
+      .map(([k, v]) => `- ${k}: ${v}`)
+      .join("\n");
     const userPrompt = `Recipient:
-- name: ${r.first_name ?? ""} ${r.last_name ?? ""}
-- title: ${r.title ?? ""}
-- company: ${r.company ?? ""}
+- email: ${(r as any).email}
+${dataLines || "(no extra fields)"}
 
 Template subject: ${campaign.subject_template}
 Template body:

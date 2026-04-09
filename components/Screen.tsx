@@ -18,6 +18,7 @@ export function Screen({ children, scroll = true }: Props) {
           <ScrollView
             contentContainerStyle={{ paddingBottom: 48 }}
             keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
           >
             {children}
           </ScrollView>
