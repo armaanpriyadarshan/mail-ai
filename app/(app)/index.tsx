@@ -35,9 +35,13 @@ export default function Home() {
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
   const [tab, setTab] = useState<Tab>("active");
+  // Track campaigns that are visually done (all recipients sent) but backend
+  // hasn't flipped status yet. These get removed from the active list.
+  const [dismissed, setDismissed] = useState<Set<string>>(new Set());
 
-  const active = campaigns?.filter((c) => ACTIVE_STATUSES.includes(c.status)) ?? [];
-  const history = campaigns?.filter((c) => !ACTIVE_STATUSES.includes(c.status)) ?? [];
+  const active = (campaigns?.filter((c) => ACTIVE_STATUSES.includes(c.status)) ?? [])
+    .filter((c) => !dismissed.has(c.id));
+  const history = campaigns?.filter((c) => !ACTIVE_STATUSES.includes(c.status) || dismissed.has(c.id)) ?? [];
   const visible = tab === "active" ? active : history;
 
 
@@ -144,7 +148,12 @@ export default function Home() {
         ) : (
           <View className="px-card gap-4 pt-2">
             {visible.map((c, i) => (
-              <CampaignCard key={c.id} c={c} delay={i * 60} />
+              <CampaignCard
+                key={c.id}
+                c={c}
+                delay={i * 60}
+                onDone={tab === "active" ? () => setDismissed((s) => new Set(s).add(c.id)) : undefined}
+              />
             ))}
           </View>
         )}
@@ -165,11 +174,24 @@ export default function Home() {
   );
 }
 
-function CampaignCard({ c, delay }: { c: Campaign; delay: number }) {
+function CampaignCard({ c, delay, onDone }: { c: Campaign; delay: number; onDone?: () => void }) {
   const router = useRouter();
   const { data: counts } = useRecipientCounts(c.id);
   const total = counts?.total ?? 0;
   const sent = counts?.sent ?? 0;
+  const failed = counts?.failed ?? 0;
+
+  // When all recipients are sent/failed and the campaign is still "sending",
+  // treat it as visually complete and trigger the slide-out.
+  const allDone = total > 0 && sent + failed >= total && c.status === "sending";
+  const doneTriggered = useRef(false);
+  useEffect(() => {
+    if (allDone && !doneTriggered.current) {
+      doneTriggered.current = true;
+      const t = setTimeout(() => onDone?.(), 800);
+      return () => clearTimeout(t);
+    }
+  }, [allDone, onDone]);
 
   return (
     <Animated.View
@@ -184,7 +206,9 @@ function CampaignCard({ c, delay }: { c: Campaign; delay: number }) {
           <View className="flex-row justify-between items-start mb-3">
             <Text className="text-lg text-ink font-medium flex-1 pr-3">{c.name}</Text>
             <View className="bg-accentSoft px-3 py-1 rounded-full">
-              <Text className="text-accent text-xs">{statusLabel(c.status)}</Text>
+              <Text className="text-accent text-xs">
+                {allDone ? "Sent" : statusLabel(c.status)}
+              </Text>
             </View>
           </View>
           <Text className="text-muted text-sm mb-4">{total} recipients</Text>
