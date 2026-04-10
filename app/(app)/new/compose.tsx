@@ -31,6 +31,7 @@ export default function Compose() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [goal, setGoal] = useState("");
   const [context, setContext] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const generate = useGenerateEmail();
   const create = useCreateCampaign(user?.id);
@@ -78,15 +79,17 @@ export default function Compose() {
   };
 
   const onSaveDraft = async () => {
+    setSubmitted(true);
     const campaign = await createCampaign();
-    if (!campaign) return;
+    if (!campaign) { setSubmitted(false); return; }
     draft.reset();
     router.replace("/(app)");
   };
 
   const onSend = async () => {
+    setSubmitted(true);
     const campaign = await createCampaign();
-    if (!campaign) return;
+    if (!campaign) { setSubmitted(false); return; }
     try {
       if (draft.aiPersonalize) {
         await personalize.mutateAsync({ campaign_id: campaign.id });
@@ -95,6 +98,7 @@ export default function Compose() {
       draft.reset();
       router.replace(`/(app)/campaign/${campaign.id}`);
     } catch (e: any) {
+      setSubmitted(false);
       Alert.alert("Couldn't start sending", e?.message ?? "Try again.");
     }
   };
@@ -164,18 +168,18 @@ export default function Compose() {
         </Pressable>
 
         <View className="gap-3">
-          <Button variant="ghost" onPress={() => setPreviewOpen(true)}>
+          <Button variant="ghost" onPress={() => setPreviewOpen(true)} disabled={submitted}>
             Preview
           </Button>
           <Button
             variant="secondary"
             onPress={onSaveDraft}
-            loading={create.isPending && !start.isPending}
-            disabled={!canSave}
+            loading={submitted && !start.isPending}
+            disabled={!canSave || submitted}
           >
             Save as draft
           </Button>
-          <Button onPress={onSend} loading={create.isPending || start.isPending} disabled={!canSave}>
+          <Button onPress={onSend} loading={submitted} disabled={!canSave || submitted}>
             Send campaign →
           </Button>
         </View>

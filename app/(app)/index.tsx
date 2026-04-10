@@ -2,9 +2,9 @@ import { View, Text, Pressable, RefreshControl, ScrollView } from "react-native"
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import Animated, { FadeInDown, SlideOutLeft } from "react-native-reanimated";
 import { useAuth } from "@/lib/auth-store";
 import { useCampaigns, useRecipientCounts } from "@/lib/queries";
-import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { EmptyState } from "@/components/EmptyState";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -40,14 +40,6 @@ export default function Home() {
   const history = campaigns?.filter((c) => !ACTIVE_STATUSES.includes(c.status)) ?? [];
   const visible = tab === "active" ? active : history;
 
-  // Auto-switch to history when a campaign finishes (active count drops).
-  const prevActiveCount = useRef(active.length);
-  useEffect(() => {
-    if (prevActiveCount.current > 0 && active.length < prevActiveCount.current && tab === "active") {
-      setTab("history");
-    }
-    prevActiveCount.current = active.length;
-  }, [active.length, tab]);
 
   // Realtime: invalidate recipient counts whenever any recipient for one of
   // the user's campaigns flips status. The filter scopes the subscription to
@@ -180,18 +172,28 @@ function CampaignCard({ c, delay }: { c: Campaign; delay: number }) {
   const sent = counts?.sent ?? 0;
 
   return (
-    <Card delay={delay} onPress={() => router.push(`/(app)/campaign/${c.id}`)}>
-      <View className="flex-row justify-between items-start mb-3">
-        <Text className="text-lg text-ink font-medium flex-1 pr-3">{c.name}</Text>
-        <View className="bg-accentSoft px-3 py-1 rounded-full">
-          <Text className="text-accent text-xs">{statusLabel(c.status)}</Text>
+    <Animated.View
+      entering={FadeInDown.delay(delay).duration(280).springify()}
+      exiting={SlideOutLeft.duration(300)}
+    >
+      <Pressable
+        onPress={() => router.push(`/(app)/campaign/${c.id}`)}
+        className="active:opacity-80"
+      >
+        <View className="bg-card rounded-card p-card border border-line">
+          <View className="flex-row justify-between items-start mb-3">
+            <Text className="text-lg text-ink font-medium flex-1 pr-3">{c.name}</Text>
+            <View className="bg-accentSoft px-3 py-1 rounded-full">
+              <Text className="text-accent text-xs">{statusLabel(c.status)}</Text>
+            </View>
+          </View>
+          <Text className="text-muted text-sm mb-4">{total} recipients</Text>
+          <ProgressBar value={sent} total={total || 1} />
+          <Text className="text-muted text-xs mt-2">
+            {sent} of {total} sent
+          </Text>
         </View>
-      </View>
-      <Text className="text-muted text-sm mb-4">{total} recipients</Text>
-      <ProgressBar value={sent} total={total || 1} />
-      <Text className="text-muted text-xs mt-2">
-        {sent} of {total} sent
-      </Text>
-    </Card>
+      </Pressable>
+    </Animated.View>
   );
 }

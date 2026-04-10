@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, Text, FlatList, Alert } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,6 +15,7 @@ export default function CampaignDetail() {
   const { data: recipients } = useRecipients(id);
   const start = useStartCampaign();
   const personalize = usePersonalizeEmails();
+  const [sending, setSending] = useState(false);
 
   const total = recipients?.length ?? 0;
   const sent = (recipients ?? []).filter((r) => r.status === "sent").length;
@@ -21,12 +23,14 @@ export default function CampaignDetail() {
 
   const onSend = async () => {
     if (!campaign || !id) return;
+    setSending(true);
     try {
       if (campaign.ai_personalize) {
         await personalize.mutateAsync({ campaign_id: id });
       }
       await start.mutateAsync(id);
     } catch (e: any) {
+      setSending(false);
       Alert.alert("Couldn't start sending", e?.message ?? "Try again.");
     }
   };
@@ -57,7 +61,7 @@ export default function CampaignDetail() {
 
       {campaign?.status === "draft" && (
         <View className="px-card mt-4">
-          <Button onPress={onSend} loading={start.isPending || personalize.isPending}>
+          <Button onPress={onSend} loading={sending} disabled={sending}>
             Send campaign
           </Button>
         </View>
