@@ -58,8 +58,12 @@ export default function Home() {
 
   useEffect(() => {
     if (!user?.id) return;
+    const channelName = `home-${user.id}`;
+    // Remove any stale channel with the same name before creating a new one.
+    const existing = supabase.getChannels().find((ch) => ch.topic === `realtime:${channelName}`);
+    if (existing) supabase.removeChannel(existing);
     const channel = supabase
-      .channel(`home-${user.id}`)
+      .channel(channelName)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "recipients" },
