@@ -52,17 +52,20 @@ export default function Home() {
   // Realtime: invalidate recipient counts whenever any recipient for one of
   // the user's campaigns flips status. The filter scopes the subscription to
   // just the current list so we don't get updates for other users.
+  // Stable realtime subscription — subscribe once per user, filter in callbacks.
+  const campaignsRef = useRef(campaigns);
+  campaignsRef.current = campaigns;
+
   useEffect(() => {
-    if (!campaigns || campaigns.length === 0) return;
-    const ids = campaigns.map((c) => c.id);
-    const channelName = `home-recipients-${ids.sort().join(",")}`;
+    if (!user?.id) return;
     const channel = supabase
-      .channel(channelName)
+      .channel(`home-${user.id}`)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "recipients" },
         (payload: any) => {
           const cid = payload.new?.campaign_id ?? payload.old?.campaign_id;
+          const ids = campaignsRef.current?.map((c) => c.id) ?? [];
           if (cid && ids.includes(cid)) {
             queryClient.invalidateQueries({ queryKey: ["recipient-counts", cid] });
           }
@@ -72,8 +75,8 @@ export default function Home() {
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "campaigns" },
         (payload: any) => {
-          if (payload.new?.user_id === user?.id) {
-            queryClient.invalidateQueries({ queryKey: ["campaigns", user?.id] });
+          if (payload.new?.user_id === user.id) {
+            queryClient.invalidateQueries({ queryKey: ["campaigns", user.id] });
           }
         },
       )
@@ -81,7 +84,7 @@ export default function Home() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [campaigns, queryClient, user?.id]);
+  }, [user?.id, queryClient]);
 
   const onRefresh = async () => {
     setRefreshing(true);
