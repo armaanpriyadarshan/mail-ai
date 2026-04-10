@@ -8,16 +8,16 @@ import { TextField } from "@/components/TextField";
 import { Button } from "@/components/Button";
 import { BottomSheet } from "@/components/BottomSheet";
 import { useDraft } from "@/lib/draft-store";
-import { useSearchLeads, useGuessEmails, useProfile, useCreateCheckout } from "@/lib/queries";
+import { useSearchLeads, useGuessEmails, useProfile, useCreateCheckout, useRecentContacts } from "@/lib/queries";
 import { useAuth } from "@/lib/auth-store";
 import type { Lead } from "@/lib/types";
 
-type Mode = "manual" | "search" | "guess";
+type Mode = "recent" | "manual" | "search" | "guess";
 
 export default function Contacts() {
   const router = useRouter();
   const draft = useDraft();
-  const [mode, setMode] = useState<Mode>("manual");
+  const [mode, setMode] = useState<Mode>("recent");
 
   return (
     <Screen>
@@ -36,6 +36,7 @@ export default function Contacts() {
         </View>
 
         <View className="mt-6">
+          {mode === "recent" ? <RecentMode /> : null}
           {mode === "manual" ? <ManualMode /> : null}
           {mode === "search" ? <SearchMode /> : null}
           {mode === "guess" ? <GuessMode /> : null}
@@ -135,6 +136,7 @@ function FieldsEditor() {
 
 function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }) {
   const tabs: { key: Mode; label: string; premium?: boolean }[] = [
+    { key: "recent", label: "Recent" },
     { key: "manual", label: "I have a list" },
     { key: "guess", label: "Guess emails" },
     { key: "search", label: "Find with AI", premium: true },
@@ -167,6 +169,81 @@ function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void 
           </Pressable>
         );
       })}
+    </View>
+  );
+}
+
+// ---- Recent contacts -------------------------------------------------------
+
+function RecentMode() {
+  const { user } = useAuth();
+  const draft = useDraft();
+  const { data: recent, isLoading } = useRecentContacts(user?.id);
+
+  const addContact = (lead: Lead) => {
+    if (draft.leads.some((l) => l.email === lead.email)) return;
+    draft.addLeads([lead]);
+  };
+
+  const addAll = () => {
+    const newLeads = (recent ?? []).filter(
+      (r) => !draft.leads.some((l) => l.email === r.email),
+    );
+    if (newLeads.length > 0) draft.addLeads(newLeads);
+  };
+
+  if (isLoading) {
+    return (
+      <View className="py-8 items-center">
+        <Text className="text-muted text-sm">Loading...</Text>
+      </View>
+    );
+  }
+
+  if (!recent || recent.length === 0) {
+    return (
+      <View className="py-8 items-center">
+        <Text className="text-muted text-sm">No sent emails yet.</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <View className="gap-2">
+        {recent.map((lead) => {
+          const already = draft.leads.some((l) => l.email === lead.email);
+          const displayName = draft.fields
+            .map((f) => lead.data[f])
+            .filter(Boolean)
+            .join(" · ");
+          return (
+            <Pressable
+              key={lead.email}
+              onPress={() => addContact(lead)}
+              disabled={already}
+              className={`bg-card border border-line rounded-card p-4 flex-row items-center justify-between ${already ? "opacity-50" : ""}`}
+            >
+              <View className="flex-1 pr-3">
+                <Text className="text-ink text-sm">{lead.email}</Text>
+                {displayName ? (
+                  <Text className="text-muted text-xs mt-0.5">{displayName}</Text>
+                ) : null}
+              </View>
+              <Ionicons
+                name={already ? "checkmark-circle" : "add-circle-outline"}
+                size={22}
+                color={already ? "#3C8C5C" : "#E26A2C"}
+              />
+            </Pressable>
+          );
+        })}
+      </View>
+      <View className="mt-3">
+        <Button variant="secondary" onPress={addAll}>
+          Add all to list
+        </Button>
+      </View>
     </View>
   );
 }

@@ -122,6 +122,34 @@ export function useRecipients(campaignId: string | undefined) {
   });
 }
 
+// ---- recent contacts -------------------------------------------------------
+export function useRecentContacts(userId: string | undefined) {
+  return useQuery({
+    enabled: !!userId,
+    queryKey: ["recent-contacts", userId],
+    queryFn: async (): Promise<Lead[]> => {
+      const { data, error } = await supabase
+        .from("recipients")
+        .select("email, data, sent_at, campaigns!inner(user_id)")
+        .eq("campaigns.user_id", userId!)
+        .eq("status", "sent")
+        .order("sent_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      // Deduplicate by email, keep most recent
+      const seen = new Set<string>();
+      const leads: Lead[] = [];
+      for (const r of data ?? []) {
+        if (seen.has(r.email)) continue;
+        seen.add(r.email);
+        leads.push({ email: r.email, data: (r.data ?? {}) as Record<string, string> });
+        if (leads.length >= 3) break;
+      }
+      return leads;
+    },
+  });
+}
+
 // ---- edge function helpers -------------------------------------------------
 // supabase-js throws a generic "non-2xx status code" for any error response.
 // We unwrap the response body so the UI can show the real message.
