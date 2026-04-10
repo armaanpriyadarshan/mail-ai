@@ -9,7 +9,7 @@ import { Button } from "@/components/Button";
 import { EmptyState } from "@/components/EmptyState";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Header } from "@/components/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import type { Campaign } from "@/lib/types";
@@ -39,6 +39,15 @@ export default function Home() {
   const active = campaigns?.filter((c) => ACTIVE_STATUSES.includes(c.status)) ?? [];
   const history = campaigns?.filter((c) => !ACTIVE_STATUSES.includes(c.status)) ?? [];
   const visible = tab === "active" ? active : history;
+
+  // Auto-switch to history when a campaign finishes (active count drops).
+  const prevActiveCount = useRef(active.length);
+  useEffect(() => {
+    if (prevActiveCount.current > 0 && active.length < prevActiveCount.current && tab === "active") {
+      setTab("history");
+    }
+    prevActiveCount.current = active.length;
+  }, [active.length, tab]);
 
   // Realtime: invalidate recipient counts whenever any recipient for one of
   // the user's campaigns flips status. The filter scopes the subscription to
