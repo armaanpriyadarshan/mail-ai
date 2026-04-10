@@ -12,12 +12,12 @@ import { useSearchLeads, useGuessEmails, useProfile, useCreateCheckout, useRecen
 import { useAuth } from "@/lib/auth-store";
 import type { Lead } from "@/lib/types";
 
-type Mode = "recent" | "manual" | "search" | "guess";
+type Mode = "manual" | "search" | "guess";
 
 export default function Contacts() {
   const router = useRouter();
   const draft = useDraft();
-  const [mode, setMode] = useState<Mode>("recent");
+  const [mode, setMode] = useState<Mode>("manual");
 
   return (
     <Screen>
@@ -31,12 +31,13 @@ export default function Contacts() {
 
         <FieldsEditor />
 
+        <RecentSection />
+
         <View className="mt-6">
           <ModeTabs mode={mode} onChange={setMode} />
         </View>
 
         <View className="mt-6">
-          {mode === "recent" ? <RecentMode /> : null}
           {mode === "manual" ? <ManualMode /> : null}
           {mode === "search" ? <SearchMode /> : null}
           {mode === "guess" ? <GuessMode /> : null}
@@ -136,7 +137,6 @@ function FieldsEditor() {
 
 function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }) {
   const tabs: { key: Mode; label: string; premium?: boolean }[] = [
-    { key: "recent", label: "Recent" },
     { key: "manual", label: "I have a list" },
     { key: "guess", label: "Guess emails" },
     { key: "search", label: "Find with AI", premium: true },
@@ -175,41 +175,21 @@ function ModeTabs({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void 
 
 // ---- Recent contacts -------------------------------------------------------
 
-function RecentMode() {
+function RecentSection() {
   const { user } = useAuth();
   const draft = useDraft();
   const { data: recent, isLoading } = useRecentContacts(user?.id);
+
+  if (isLoading || !recent || recent.length === 0) return null;
 
   const addContact = (lead: Lead) => {
     if (draft.leads.some((l) => l.email === lead.email)) return;
     draft.addLeads([lead]);
   };
 
-  const addAll = () => {
-    const newLeads = (recent ?? []).filter(
-      (r) => !draft.leads.some((l) => l.email === r.email),
-    );
-    if (newLeads.length > 0) draft.addLeads(newLeads);
-  };
-
-  if (isLoading) {
-    return (
-      <View className="py-8 items-center">
-        <Text className="text-muted text-sm">Loading...</Text>
-      </View>
-    );
-  }
-
-  if (!recent || recent.length === 0) {
-    return (
-      <View className="py-8 items-center">
-        <Text className="text-muted text-sm">No sent emails yet.</Text>
-      </View>
-    );
-  }
-
   return (
-    <View>
+    <View className="mt-6">
+      <Text className="text-muted text-xs mb-2">Recently emailed</Text>
       <View className="gap-2">
         {recent.map((lead) => {
           const already = draft.leads.some((l) => l.email === lead.email);
@@ -222,7 +202,7 @@ function RecentMode() {
               key={lead.email}
               onPress={() => addContact(lead)}
               disabled={already}
-              className={`bg-card border border-line rounded-card p-4 flex-row items-center justify-between ${already ? "opacity-50" : ""}`}
+              className={`bg-card border border-line rounded-card p-3 flex-row items-center justify-between ${already ? "opacity-50" : ""}`}
             >
               <View className="flex-1 pr-3">
                 <Text className="text-ink text-sm">{lead.email}</Text>
@@ -232,17 +212,12 @@ function RecentMode() {
               </View>
               <Ionicons
                 name={already ? "checkmark-circle" : "add-circle-outline"}
-                size={22}
+                size={20}
                 color={already ? "#3C8C5C" : "#E26A2C"}
               />
             </Pressable>
           );
         })}
-      </View>
-      <View className="mt-3">
-        <Button variant="secondary" onPress={addAll}>
-          Add all to list
-        </Button>
       </View>
     </View>
   );
