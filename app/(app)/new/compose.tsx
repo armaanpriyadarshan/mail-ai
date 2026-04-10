@@ -38,6 +38,7 @@ export default function Compose() {
   const personalize = usePersonalizeEmails();
 
   const recipientCount = draft.leads.filter((l) => !!l.email).length;
+  const canSave = !!draft.subject?.trim() && !!draft.body?.trim();
 
   const onGenerate = async () => {
     if (!goal) return;
@@ -170,10 +171,11 @@ export default function Compose() {
             variant="secondary"
             onPress={onSaveDraft}
             loading={create.isPending && !start.isPending}
+            disabled={!canSave}
           >
             Save as draft
           </Button>
-          <Button onPress={onSend} loading={create.isPending || start.isPending}>
+          <Button onPress={onSend} loading={create.isPending || start.isPending} disabled={!canSave}>
             Send campaign →
           </Button>
         </View>
