@@ -1,0 +1,336 @@
+name,role,company,email,date_sent,verified
+Devin Mathews,Partner,ParkerGale Capital,devin@parkergale.com,2026-04-09,valid
+Darren Cheng,CTO,Thanx,darren@thanx.com,2026-04-09,valid
+Darren Cheng,CTO,Thanx,darren.cheng@thanx.com,2026-04-09,unverified
+Jeff Kovach,Managing Partner,Arsenal Capital Partners,jkovach@arsenalcapital.com,2026-04-09,accept_all
+Jeff Kovach,Managing Partner,Arsenal Capital Partners,jeff.kovach@arsenalcapital.com,2026-04-09,accept_all
+Owen DeHoff,Managing Partner,Jasper Ridge Partners,odehoff@jasperridge.com,2026-04-10,valid
+Owen DeHoff,Managing Partner,Jasper Ridge Partners,owen.dehoff@jasperridge.com,2026-04-09,BOUNCED
+Rob Morris,Managing Partner,Olympus Partners,rmorris@olympuspartners.com,2026-04-09,BOUNCED
+Mike Murray,Managing Partner,Peloton Capital Management,mike@pelotoncapitalmanagement.com,2026-04-09,accept_all
+Mike Murray,Managing Partner,Peloton Capital Management,mmurray@pelotoncapitalmanagement.com,2026-04-09,accept_all
+Renny Smith,Managing Partner,Staley Capital,rsmith@staleycapital.com,2026-04-10,valid
+Renny Smith,Managing Partner,Staley Capital,renny@staleycapital.com,2026-04-09,BOUNCED
+Jonathan DeSimone,Founder,Meta Investment Group,jonathan@metaig.capital,2026-04-10,valid
+Jonathan DeSimone,Founder,Meta Investment Group,jdesimone@metaig.capital,2026-04-09,BOUNCED
+Ana Kreacic,Chief Knowledge Officer,Oliver Wyman,ana.kreacic@oliverwyman.com,2026-04-09,accept_all
+Michael Zeltkevic,Managing Partner,Oliver Wyman,michael.zeltkevic@oliverwyman.com,2026-04-09,accept_all
+Bob Willen,Managing Partner,Kearney,bob.willen@kearney.com,2026-04-09,accept_all
+Bob Willen,Managing Partner,Kearney,b.willen@kearney.com,2026-04-09,accept_all
+Tim Harsch,CEO,Owler,tim@owler-inc.com,2026-04-09,unknown_bad_mx
+Aleksandr Yampolskiy,CEO,SecurityScorecard,ayampolskiy@securityscorecard.io,2026-04-10,valid
+Geoff Charron,SVP Engineering,Inovalon,geoff.charron@inovalon.com,2026-04-10,accept_all
+Paul Linton,Chief Strategy Officer,FTI Consulting,paul.linton@fticonsulting.com,2026-04-10,valid
+John Rutan,Partner,L.E.K. Consulting,j.rutan@lek.com,2026-04-10,accept_all
+Gavin McGrath,Partner,L.E.K. Consulting,g.mcgrath@lek.com,2026-04-10,accept_all
+Monish Rajpal,Partner,L.E.K. Consulting,m.rajpal@lek.com,2026-04-10,accept_all
+Pierre Jacquet,Vice Chairman Healthcare,L.E.K. Consulting,p.jacquet@lek.com,2026-04-10,accept_all
+Anne Stemlar,MD Knowledge & Innovation,Goodwin Procter,astemlar@goodwinprocter.com,2026-04-10,valid
+Colleen Nihill,Chief AI & Knowledge Officer,Morgan Lewis,colleen.nihill@morganlewis.com,2026-04-10,valid
+Charlotte Logullo,Director Innovative Technology,Foley & Lardner,clogullo@foley.com,2026-04-10,accept_all
+Richard Gordon,Director of Knowledge Management,Wilson Elser,rgordon@wilsonelser.com,2026-04-10,accept_all
+Jennifer Jarrett,COO,Arcus Biosciences,jjarrett@arcusbio.com,2026-04-10,valid
+Jesse Rosenfeld,Head of Investor Relations,Brightstar Capital Partners,jrosenfeld@brightstarcp.com,2026-04-10,valid
+Brian Cronin,Managing Director,Brightstar Capital Partners,bcronin@brightstarcp.com,2026-04-10,valid
+Ken Xuan,Head of Data Science,Fundstrat,ken.xuan@fundstrat.com,2026-04-10,valid
+Sean Farrell,Head of Digital Asset Strategy,Fundstrat,sean.farrell@fundstrat.com,2026-04-10,valid
+Jonathan Levin,CEO,Chainalysis,jonathan.levin@chainalysis.com,2026-04-10,valid
+Matt Grimm,COO,Anduril,matt.grimm@anduril.com,2026-04-10,valid
+Nathan Michael,CTO,Shield AI,nathan.michael@shield.ai,2026-04-10,accept_all
+Chris Sugden,Managing Partner,Edison Partners,csugden@edisonpartners.com,2026-04-10,valid
+Chris Jones,Managing Partner,Align Capital Partners,cjones@aligncp.com,2026-04-10,valid
+Rob Langley,Managing Partner,Align Capital Partners,rlangley@aligncp.com,2026-04-10,valid
+Katie Noggle,Head of Business Development,Align Capital Partners,knoggle@aligncp.com,2026-04-10,valid
+Josh Nelson,Head of Healthcare,THL Partners,jnelson@thl.com,2026-04-10,valid
+Jon Lange,Managing Director,THL Partners,jlange@thl.com,2026-04-10,valid
+Greg Lambert,Chief Innovation Officer,Jackson Walker,greg.lambert@jw.com,2026-04-10,BOUNCED
+Isabel Parker,Chief Innovation Officer,White & Case,isabel.parker@whitecase.com,2026-04-10,pattern
+Oz Benamram,Chief Knowledge Officer,White & Case,oz.benamram@whitecase.com,2026-04-10,BOUNCED
+Wendy Curtis,Chief Innovation Officer,Orrick,wendy.curtis@orrick.com,2026-04-10,BOUNCED
+David Cunningham,Chief Innovation Officer,Reed Smith,david.cunningham@reedsmith.com,2026-04-10,BOUNCED
+William Gaus,Chief KM & Innovation Officer,Troutman Pepper,william.gaus@troutman.com,2026-04-10,pattern
+Tarun Mathur,CTO,Indegene,tarun.mathur@indegene.com,2026-04-10,pattern
+James Vandezande,CTO,HOK,jvandezande@hok.com,2026-04-10,BOUNCED
+Thomas Robson,COO,HOK,trobson@hok.com,2026-04-10,BOUNCED
+Roshen Menon,Managing Partner,Guidepost Growth Equity,rmenon@guidepostgrowth.com,2026-04-10,BOUNCED
+Chris Cavanagh,Partner,Guidepost Growth Equity,ccavanagh@guidepostgrowth.com,2026-04-10,pattern
+Russ Pyle,Partner,Guidepost Growth Equity,rpyle@guidepostgrowth.com,2026-04-10,BOUNCED
+Graham Weaver,Managing Partner,Alpine Investors,gweaver@alpineinvestors.com,2026-04-10,pattern
+Mark Strauch,Founding Partner,Alpine Investors,mstrauch@alpineinvestors.com,2026-04-10,pattern
+Leslie Foard,VP Operations,Alpine Investors,lfoard@alpineinvestors.com,2026-04-10,pattern
+Jeff Crowe,Managing Partner,Norwest Venture Partners,jcrowe@norwest.com,2026-04-10,BOUNCED
+Promod Haque,Managing Partner,Norwest Venture Partners,phaque@norwest.com,2026-04-10,BOUNCED
+Jon Kossow,Managing Partner,Norwest Venture Partners,jkossow@norwest.com,2026-04-10,pattern
+Scott Collins,COO,Summit Partners,scott.collins@summitpartners.com,2026-04-10,BOUNCED
+Peter Chung,CEO,Summit Partners,peter.chung@summitpartners.com,2026-04-10,BOUNCED
+Nissim Tapiro,CTO,NEXT Insurance,ntapiro@nextinsurance.com,2026-04-10,BOUNCED
+Nissim Tapiro,CTO,NEXT Insurance,nissim.tapiro@nextinsurance.com,2026-04-10,BOUNCED
+Kinnari Patel,President & COO,Rocket Pharmaceuticals,kpatel@rocketpharma.com,2026-04-10,pattern
+Kinnari Patel,President & COO,Rocket Pharmaceuticals,kinnari.patel@rocketpharma.com,2026-04-10,BOUNCED
+Megan Preiner,Managing Director,THL Partners,mpreiner@thl.com,2026-04-10,pattern
+Nate Machado,Operating Partner,Guidepost Growth Equity,nmachado@guidepostgrowth.com,2026-04-10,BOUNCED
+Kate Ramirez,CFO,Guidepost Growth Equity,kramirez@guidepostgrowth.com,2026-04-10,pattern
+Achin Bhowmik,CTO,Starkey,achin.bhowmik@starkey.com,2026-04-10,pattern
+Jon Korngold,Head of BXG,Blackstone,jon.korngold@blackstone.com,2026-04-10,pattern
+Vishal Amin,Senior MD,Blackstone Growth,vishal.amin@blackstone.com,2026-04-10,pattern
+Bilal Chaudhry,Managing Director,Blackstone Growth,bilal.chaudhry@blackstone.com,2026-04-10,pattern
+Katie Storer,Managing Director,Blackstone Growth,katie.storer@blackstone.com,2026-04-10,pattern
+Paul Morrissey,Managing Director,Blackstone Growth,paul.morrissey@blackstone.com,2026-04-10,pattern
+Yifat Oron,Senior MD,Blackstone Growth,yifat.oron@blackstone.com,2026-04-10,pattern
+Paul Coughlan,COO,Arup,paul.coughlan@arup.com,2026-04-10,pattern
+Jerome Frost,CEO,Arup,jerome.frost@arup.com,2026-04-10,pattern
+Sarah Urbanowicz,CIO,AECOM,sarah.urbanowicz@aecom.com,2026-04-10,pattern
+Gaurav Kapoor,CFO & COO,AECOM,gaurav.kapoor@aecom.com,2026-04-10,pattern
+Dan Kagan,President & COO,Scientist.com,dan.kagan@scientist.com,2026-04-10,pattern
+Abhi Verma,CTO,SOPHiA Genetics,abhi.verma@sophiagenetics.com,2026-04-10,pattern
+Jeff Sippel,Chief Strategy Officer,Northwestern Mutual,jeff.sippel@northwesternmutual.com,2026-04-10,BOUNCED
+Christian Mitchell,Chief Digital Officer,Northwestern Mutual,christian.mitchell@northwesternmutual.com,2026-04-10,BOUNCED
+Michael Rinehart,CIO,Dechert,michael.rinehart@dechert.com,2026-04-10,pattern
+Thor Alden,Associate Director Innovation,Dechert,thor.alden@dechert.com,2026-04-10,pattern
+Gaurang Patel,VP IT,Revance,gaurang.patel@revance.com,2026-04-10,pattern
+Kurt MacAlpine,CEO,Corient,kurt.macalpine@corient.com,2026-04-10,pattern
+Leonard Gullan,COO,Corient,leonard.gullan@corient.com,2026-04-10,BOUNCED
+Matt Krauss,CIO,Corient,matt.krauss@corient.com,2026-04-10,BOUNCED
+Joe Glick,COO,Sequoia Financial Group,jglick@sequoia-financial.com,2026-04-10,pattern
+Joe Glick,COO,Sequoia Financial Group,joe.glick@sequoia-financial.com,2026-04-10,BOUNCED
+Heather Zack,SVP Private Client Services,Carson Group,hzack@carsongroup.com,2026-04-10,pattern
+Matt Bennett,Partner,Invidia Capital,mbennett@invidiacapital.com,2026-04-10,pattern
+Matt Bennett,Partner,Invidia Capital,matt.bennett@invidiacapital.com,2026-04-10,pattern
+Rob Wolfson,Founder,Aphias Capital,rwolfson@aphiascapital.com,2026-04-10,pattern
+Rob Wolfson,Founder,Aphias Capital,rob.wolfson@aphiascapital.com,2026-04-10,pattern
+Dan Cole,CFO,LinePoint Partners,dan.cole@linepointpartners.com,2026-04-10,BOUNCED
+Dan Cole,CFO,LinePoint Partners,dcole@linepointpartners.com,2026-04-10,BOUNCED
+Dani Fava,Chief Strategy Officer,Carson Group,dani.fava@carsongroup.com,2026-04-10,pattern
+Dani Fava,Chief Strategy Officer,Carson Group,dfava@carsongroup.com,2026-04-10,pattern
+Neil Teubel,Head of Wealth Planning,Corient,neil.teubel@corient.com,2026-04-10,pattern
+Andrew Holmberg,Chief Solutions Officer,Corient,andrew.holmberg@corient.com,2026-04-10,pattern
+Annie McCauley,President,Sequoia Financial Group,amccauley@sequoia-financial.com,2026-04-10,pattern
+Eli Hoisington,Co-CEO,HOK,eli.hoisington@hok.com,2026-04-10,pattern
+Susan Klumpp Williams,Co-CEO,HOK,susan.williams@hok.com,2026-04-10,pattern
+Marianne De Backer,CEO,Vir Biotechnology,marianne.debacker@vir.bio,2026-04-10,pattern
+Marianne De Backer,CEO,Vir Biotechnology,mdebacker@vir.bio,2026-04-10,pattern
+Greg Lambert,Chief Innovation Officer,Jackson Walker,glambert@jw.com,2026-04-10,pattern
+Scott Collins,COO,Summit Partners,scott.collins@summitpartners.com,2026-04-10,BOUNCED
+John Rudge,Partner,Lexington Partners,jrudge@lexingtonpartners.com,2026-04-10,BOUNCED
+Jeff Danley,Managing Partner & CIO,Peak Capital Partners,jdanley@peakcapitalpartners.com,2026-04-10,BOUNCED
+Marianna Fassinotti,Managing Director,D.E. Shaw,marianna.fassinotti@deshaw.com,2026-04-10,delivered
+Frank Yao,Managing Director,Bain Capital,fyao@baincapital.com,2026-04-10,delivered
+Frank Yao,Managing Director,Bain Capital,frank.yao@baincapital.com,2026-04-10,BOUNCED
+Giovanni Cutaia,Senior Managing Director,Blackstone,giovanni.cutaia@blackstone.com,2026-04-10,delivered
+Russell Wolff,Managing Director,Sixth Street,rwolff@sixthstreet.com,2026-04-10,delivered
+Russell Wolff,Managing Director,Sixth Street,russell.wolff@sixthstreet.com,2026-04-10,BOUNCED
+Marco Tablada,Co-Founder & Managing Partner,Alua Capital,marco.tablada@aluacapital.com,2026-04-10,delivered
+Marco Tablada,Co-Founder & Managing Partner,Alua Capital,mtablada@aluacapital.com,2026-04-10,delivered
+Tom Purcell,Co-Founder,Alua Capital,tpurcell@aluacapital.com,2026-04-10,delivered
+Liam Donohue,Managing Partner,.406 Ventures,liam.donohue@406ventures.com,2026-04-10,BOUNCED
+Liam Donohue,Managing Partner,.406 Ventures,ldonohue@406ventures.com,2026-04-10,delivered
+So-June Min,CFO,.406 Ventures,so-june.min@406ventures.com,2026-04-10,BOUNCED
+So-June Min,CFO,.406 Ventures,smin@406ventures.com,2026-04-10,delivered
+Brenton Ahrens,General Partner,Canaan Partners,bahrens@canaan.com,2026-04-10,delivered
+Brenton Ahrens,General Partner,Canaan Partners,brenton.ahrens@canaan.com,2026-04-10,BOUNCED
+Michael Ward,Managing Director,Bain Capital,mward@baincapital.com,2026-04-10,delivered
+Michael Ward,Managing Director,Bain Capital,michael.ward@baincapital.com,2026-04-10,BOUNCED
+Errik Anderson,Founder & CEO,Alloy Therapeutics,errik.anderson@alloytx.com,2026-04-10,delivered
+David Grain,Founder & CEO,Grain Management,dg@graingp.com,2026-04-10,delivered
+David Grain,Founder & CEO,Grain Management,david.grain@graingp.com,2026-04-10,delivered
+Rick Magnuson,Founder,GI Partners,rmagnuson@gipartners.com,2026-04-10,BOUNCED
+Rick Magnuson,Founder,GI Partners,rick.magnuson@gipartners.com,2026-04-10,delivered
+Jim TenBroek,Managing Partner,Growth Catalyst Partners,jtenbroek@growthcatalystpartners.com,2026-04-10,BOUNCED
+Jim TenBroek,Managing Partner,Growth Catalyst Partners,jim.tenbroek@growthcatalystpartners.com,2026-04-10,BOUNCED
+David Coulter,Founding Partner,TPG,david.coulter@tpg.com,2026-04-10,delivered
+David Coulter,Founding Partner,TPG,dcoulter@tpg.com,2026-04-10,delivered
+Matt Oppenheimer,CEO,Remitly,matt.oppenheimer@remitly.com,2026-04-10,delivered
+Matt Oppenheimer,CEO,Remitly,matto@remitly.com,2026-04-10,BOUNCED
+Clint Stinchcomb,CEO,CuriosityStream,clint.stinchcomb@curiositystream.com,2026-04-10,delivered
+Clint Stinchcomb,CEO,CuriosityStream,cstinchcomb@curiositystream.com,2026-04-10,BOUNCED
+Sara Armbruster,CEO,Steelcase,sara.armbruster@steelcase.com,2026-04-10,delivered
+Sara Armbruster,CEO,Steelcase,sarmbruster@steelcase.com,2026-04-10,BOUNCED
+Rick Cardenas,CEO,Darden Restaurants,rick.cardenas@darden.com,2026-04-10,BOUNCED
+Rick Cardenas,CEO,Darden Restaurants,rcardenas@darden.com,2026-04-10,delivered
+Jose Minaya,Global Head,BNY Investments,jose.minaya@bny.com,2026-04-10,delivered
+Jose Minaya,Global Head,BNY Investments,jminaya@bny.com,2026-04-10,BOUNCED
+Carey Armstrong,Co-Founder & COO,Tomo,carey@tomo.com,2026-04-10,delivered
+Carey Armstrong,Co-Founder & COO,Tomo,carey.armstrong@tomo.com,2026-04-10,BOUNCED
+Courtney Bragg,Founder,Fabric Health,courtney@fabrichealth.org,2026-04-10,delivered
+Courtney Bragg,Founder,Fabric Health,cbragg@fabrichealth.org,2026-04-10,delivered
+Jeff Danley,Managing Partner & CIO,Peak Capital Partners,jeff.danley@peakcapitalpartners.com,2026-04-10,BOUNCED
+Jeff Danley,Managing Partner & CIO,Peak Capital Partners,jd@peakcapitalpartners.com,2026-04-10,BOUNCED
+Marianna Fassinotti,Managing Director,D.E. Shaw,mfassinotti@deshaw.com,2026-04-10,BOUNCED
+Marianna Fassinotti,Managing Director,D.E. Shaw,marianna@deshaw.com,2026-04-10,BOUNCED
+Matt Oppenheimer,CEO,Remitly,matt@remitly.com,2026-04-10,BOUNCED
+Matt Oppenheimer,CEO,Remitly,mopp@remitly.com,2026-04-10,BOUNCED
+Matt Oppenheimer,CEO,Remitly,matt_oppenheimer@remitly.com,2026-04-10,BOUNCED
+Rick Magnuson,Founder,GI Partners,rickmagnuson@gipartners.com,2026-04-10,BOUNCED
+Jim TenBroek,Managing Partner,Growth Catalyst,jtenbroek@gcpartners.com,2026-04-10,BOUNCED
+Jim TenBroek,Managing Partner,Growth Catalyst,jim@growthcatalystpartners.com,2026-04-10,BOUNCED
+Sara Armbruster,CEO,Steelcase,sara.armbruster@steelcase.com,2026-04-10,delivered
+Clint Stinchcomb,CEO,CuriosityStream,clint@curiositystream.com,2026-04-10,BOUNCED
+Carey Armstrong,Co-Founder & COO,Tomo,carey@tomonetworks.com,2026-04-10,BOUNCED
+Jose Minaya,Global Head,BNY Investments,jose@bny.com,2026-04-10,BOUNCED
+Rick Cardenas,CEO,Darden Restaurants,ricardo.cardenas@darden.com,2026-04-10,BOUNCED
+Liam Donohue,Managing Partner,.406 Ventures,ldonohue@406v.com,2026-04-10,BOUNCED
+Liam Donohue,Managing Partner,.406 Ventures,liam@406ventures.com,2026-04-10,BOUNCED
+Russell Wolff,Managing Director,Sixth Street,russell@sixthstreet.com,2026-04-10,BOUNCED
+Firas Raouf,General Partner,Companyon Ventures,firas@companyon.vc,2026-04-10,delivered
+Steve Tuck,Co-Founder & CEO,Oxide Computer,steve.tuck@oxide.computer,2026-04-10,delivered
+Steve Tuck,Co-Founder & CEO,Oxide Computer,steve@oxide.computer,2026-04-10,delivered
+Tomasz Tunguz,General Partner,Theory Ventures,tomasz@theory.ventures,2026-04-10,delivered
+Evan Sparks,Chief AI Product Officer,HPE,evan.sparks@hpe.com,2026-04-10,BOUNCED
+Evan Sparks,Chief AI Product Officer,HPE,esparks@hpe.com,2026-04-10,BOUNCED
+Adam Marcus,Managing Director,PSG,adam.marcus@psgequity.com,2026-04-10,delivered
+Adam Marcus,Managing Director,PSG,amarcus@psgequity.com,2026-04-10,BOUNCED
+John McCullough,Chief Operating Partner,OpenView,jmccullough@openviewpartners.com,2026-04-10,BOUNCED
+John McCullough,Chief Operating Partner,OpenView,john.mccullough@openviewpartners.com,2026-04-10,BOUNCED
+Susan Hunt Stevens,Founder & CEO,WeSpire,susan@wespire.com,2026-04-10,BOUNCED
+Susan Hunt Stevens,Founder & CEO,WeSpire,susan.stevens@wespire.com,2026-04-10,BOUNCED
+Enoch Kariuki,Board Director,Zentalis Pharmaceuticals,enoch.kariuki@zentalis.com,2026-04-10,delivered
+Anil Singhal,CEO,Trishula Therapeutics,anil.singhal@trishulathera.com,2026-04-10,BOUNCED
+Jonathan TranPham,Founder & CEO,Reflect,jonathan@reflect.app,2026-04-10,BOUNCED
+Jonathan TranPham,Founder & CEO,Reflect,jtranpham@reflect.app,2026-04-10,BOUNCED
+Jim Esposito,Executive,Edward Jones,jim.esposito@edwardjones.com,2026-04-10,BOUNCED
+Jim Esposito,Executive,Edward Jones,jesposito@edwardjones.com,2026-04-10,BOUNCED
+Jill Elliott,VP Marketing,X4 Pharmaceuticals,jelliott@x4pharma.com,2026-04-10,BOUNCED
+Jill Elliott,VP Marketing,X4 Pharmaceuticals,jill.elliott@x4pharma.com,2026-04-10,BOUNCED
+Collette Chilton,CIO,Williams College,collette.chilton@williams.edu,2026-04-10,BOUNCED
+Collette Chilton,CIO,Williams College,cchilton@williams.edu,2026-04-10,BOUNCED
+Daniel Hicklin,Founder & CEO,Werewolf Therapeutics,daniel.hicklin@werewolftx.com,2026-04-10,BOUNCED
+Daniel Hicklin,Founder & CEO,Werewolf Therapeutics,dhicklin@werewolftx.com,2026-04-10,BOUNCED
+John Donahoe,CEO,ServiceNow,john.donahoe@servicenow.com,2026-04-10,BOUNCED
+Steve Hafner,Co-Founder & CEO,Kayak,steve.hafner@kayak.com,2026-04-10,BOUNCED
+Steve Hafner,Co-Founder & CEO,Kayak,shafner@kayak.com,2026-04-10,BOUNCED
+Susan Finegan,Partner,Mintz,susan.finegan@mintz.com,2026-04-10,BOUNCED
+Susan Finegan,Partner,Mintz,smfinegan@mintz.com,2026-04-10,BOUNCED
+Mira Murati,Founder,Thinking Machines Lab,mira@thinkingmachines.ai,2026-04-10,BOUNCED
+Mark Mader,CEO,Smartsheet,mark.mader@smartsheet.com,2026-04-10,BOUNCED
+Mark Mader,CEO,Smartsheet,mmader@smartsheet.com,2026-04-10,BOUNCED
+Stephen Mandel,Founder,Lone Pine Capital,smandel@lonepinecapital.com,2026-04-10,BOUNCED
+Gregg Lemkau,Co-CEO,BDT & MSD,gregg.lemkau@bdtmsd.com,2026-04-10,BOUNCED
+Gregg Lemkau,Co-CEO,BDT & MSD,glemkau@bdtmsd.com,2026-04-10,BOUNCED
+Susan Huang,Executive Chairman,Morgan Stanley,susan.huang@morganstanley.com,2026-04-10,BOUNCED
+James Marciano,Founder & CEO,Tuck Advisors,james@tuckadvisors.com,2026-04-10,BOUNCED
+James Marciano,Founder & CEO,Tuck Advisors,jmarciano@tuckadvisors.com,2026-04-10,BOUNCED
+Graham Brooks,Partner,.406 Ventures,gbrooks@406ventures.com,2026-04-10,BOUNCED
+Graham Brooks,Partner,.406 Ventures,graham.brooks@406ventures.com,2026-04-10,BOUNCED
+Keith Dunleavy,Former CEO,Inovalon,keith.dunleavy@inovalon.com,2026-04-10,BOUNCED
+Keith Dunleavy,Former CEO,Inovalon,kdunleavy@inovalon.com,2026-04-10,BOUNCED
+Minyoung Sohn,Founder & CEO,Blue Room,minyoung@blueroom.vc,2026-04-10,BOUNCED
+Minyoung Sohn,Founder & CEO,Blue Room,msohn@blueroom.vc,2026-04-10,BOUNCED
+Jason Coloma,CEO,Maze Therapeutics,jason.coloma@mazetx.com,2026-04-10,BOUNCED
+Jason Coloma,CEO,Maze Therapeutics,jcoloma@mazetx.com,2026-04-10,BOUNCED
+Christine Kim,Investor,Greylock,christine@greylock.com,2026-04-10,BOUNCED
+Christine Kim,Investor,Greylock,ckim@greylock.com,2026-04-10,BOUNCED
+April Koh,Co-Founder & CEO,Spring Health,april@springhealth.com,2026-04-10,BOUNCED
+Ishan Gupta,Co-Founder,Juicebox,ishan@juicebox.ai,2026-04-10,BOUNCED
+David Paffenholz,Co-Founder,Juicebox,david@juicebox.ai,2026-04-10,BOUNCED
+Jake Cacciapaglia,Co-Founder,Rowan,jake@heyrowan.com,2026-04-10,BOUNCED
+Jordan Eisenberg,Co-Founder,Rowan,jordan@heyrowan.com,2026-04-10,BOUNCED
+Nilesh Undavia,Portfolio Manager,Undavia Family Office,nundavia@undavia.com,2026-04-10,BOUNCED
+John Donahoe,CEO,ServiceNow,donahoe@servicenow.com,2026-04-10,BOUNCED
+John Donahoe,CEO,ServiceNow,jdonahoe@servicenow.com,2026-04-10,BOUNCED
+Whitney Chiu,SVP Portfolio Strategy,MFO Group,whitney.chiu@mfogroup.com,2026-04-10,BOUNCED
+Whitney Chiu,SVP Portfolio Strategy,MFO Group,wchiu@mfogroup.com,2026-04-10,BOUNCED
+Andres Bayly Letts,Partner,Allie Family Office,andres.letts@alliefo.com,2026-04-10,BOUNCED
+Andres Bayly Letts,Partner,Allie Family Office,abayly@alliefo.com,2026-04-10,BOUNCED
+Sumit Saxena,CEO,Merren,sumit@merren.com,2026-04-10,BOUNCED
+Sumit Saxena,CEO,Merren,saxena@merren.com,2026-04-10,BOUNCED
+Kirsten Detrick,Biopharma Exec,Takeda,kdetrick@takeda.com,2026-04-10,BOUNCED
+Eben Pingree,Co-Founder,Kinsome,eben@kinsome.com,2026-04-10,BOUNCED
+Eben Pingree,Co-Founder,Kinsome,epingree@kinsome.com,2026-04-10,BOUNCED
+Ed Warren,Co-Founder,Zippity,ed@zippity.com,2026-04-10,BOUNCED
+Ed Warren,Co-Founder,Zippity,ewarren@zippity.com,2026-04-10,BOUNCED
+Sarah Bell,Co-Founder,Spring & Mulberry,sarah@springandmulberry.com,2026-04-10,BOUNCED
+Marianna Fassinotti,Managing Director,D.E. Shaw,marianna.fassinotti@deshaw.com,2026-04-10,delivered
+Marianna Fassinotti,Managing Director,D.E. Shaw,mfassinotti@deshaw.com,2026-04-10,BOUNCED
+Ed Glassmeyer,Founder,Oak Investment Partners,eglassmeyer@oakvc.com,2026-04-10,delivered
+Ed Glassmeyer,Founder,Oak Investment Partners,ed@oakvc.com,2026-04-10,delivered
+Peter Barris,Partner,NEA,pbarris@nea.com,2026-04-10,delivered
+Peter Barris,Partner,NEA,peter.barris@nea.com,2026-04-10,delivered
+Scott Sandell,Partner,NEA,ssandell@nea.com,2026-04-10,delivered
+Scott Sandell,Partner,NEA,scott.sandell@nea.com,2026-04-10,BOUNCED
+Phil Ferneau,Co-founder,Borealis Ventures,phil.ferneau@borealisventures.com,2026-04-10,BOUNCED
+Phil Ferneau,Co-founder,Borealis Ventures,pferneau@borealisventures.com,2026-04-10,delivered
+Frank Yao,President,VXI Global,frank.yao@vxi.com,2026-04-10,delivered
+Frank Yao,President,VXI Global,fyao@vxi.com,2026-04-10,BOUNCED
+Sarah Apgar,Founder & CEO,FitFighter,sarah@fitfighter.com,2026-04-10,delivered
+Sarah Apgar,Founder & CEO,FitFighter,sapgar@fitfighter.com,2026-04-10,BOUNCED
+Jason Trevisan,CEO,CarGurus,jason.trevisan@cargurus.com,2026-04-10,BOUNCED
+Jason Trevisan,CEO,CarGurus,jtrevisan@cargurus.com,2026-04-10,delivered
+Naval Ravikant,Co-founder,AngelList,naval@angellist.com,2026-04-10,delivered
+Naval Ravikant,Co-founder,AngelList,naval@ravikant.com,2026-04-10,delivered
+Alan Trefler,Founder & CEO,Pegasystems,alan.trefler@pega.com,2026-04-10,delivered
+Alan Trefler,Founder & CEO,Pegasystems,atrefler@pega.com,2026-04-10,delivered
+Gail Boudreaux,CEO,Elevance Health,gail.boudreaux@elevancehealth.com,2026-04-10,delivered
+Gail Boudreaux,CEO,Elevance Health,gboudreaux@elevancehealth.com,2026-04-10,delivered
+George Cook,Founder,Honeycomb Credit,george@honeycombcredit.com,2026-04-10,delivered
+George Cook,Founder,Honeycomb Credit,gcook@honeycombcredit.com,2026-04-10,BOUNCED
+Andrew Olaleye,Founder,Chatdesk,andrew@chatdesk.com,2026-04-10,delivered
+Andrew Olaleye,Founder,Chatdesk,aolaleye@chatdesk.com,2026-04-10,BOUNCED
+Roger McNamee,Co-founder,Elevation Partners,roger@elevation.com,2026-04-10,delivered
+Roger McNamee,Co-founder,Elevation Partners,rmcnamee@elevation.com,2026-04-10,BOUNCED
+Tracy Sun,Co-founder,Poshmark,tracy@poshmark.com,2026-04-10,delivered
+Tracy Sun,Co-founder,Poshmark,tsun@poshmark.com,2026-04-10,BOUNCED
+Langley Steinert,Founder,CarGurus/TripAdvisor,langley@cargurus.com,2026-04-10,delivered
+Langley Steinert,Founder,CarGurus/TripAdvisor,lsteinert@cargurus.com,2026-04-10,delivered
+Brent Frei,Founder & CEO,TerraClear,brent.frei@terraclear.com,2026-04-10,delivered
+Brent Frei,Founder & CEO,TerraClear,brent@terraclear.com,2026-04-10,delivered
+Ambika Singh,CEO,Armoire,ambika@armoire.style,2026-04-10,delivered
+Ambika Singh,CEO,Armoire,asingh@armoire.style,2026-04-10,BOUNCED
+Louis Gerstner,Former CEO,IBM,louis.gerstner@ibm.com,2026-04-10,BOUNCED
+Jim Esposito,Senior Executive,Goldman Sachs,jim.esposito@gs.com,2026-04-10,BOUNCED
+Lew Cirne,Founder,New Relic,lew@newrelic.com,2026-04-10,BOUNCED
+Lew Cirne,Founder,New Relic,lcirne@newrelic.com,2026-04-10,BOUNCED
+Sean Byrnes,CEO,Outlier AI,sean@outlier.ai,2026-04-10,BOUNCED
+Sean Byrnes,CEO,Outlier AI,sbyrnes@outlier.ai,2026-04-10,BOUNCED
+Jonathan Cedar,Co-founder & CEO,BioLite,jonathan@bioliteenergy.com,2026-04-10,delivered
+Jonathan Cedar,Co-founder & CEO,BioLite,jcedar@bioliteenergy.com,2026-04-10,BOUNCED
+Jay Bregman,CEO,Thimble,jay@thimble.com,2026-04-10,delivered
+Jay Bregman,CEO,Thimble,jbregman@thimble.com,2026-04-10,delivered
+Nathaniel Fick,GM Security,Elastic,nfick@elastic.co,2026-04-10,BOUNCED
+Nathaniel Fick,GM Security,Elastic,nathaniel.fick@elastic.co,2026-04-10,BOUNCED
+Jack Groetzinger,Co-founder & CEO,SeatGeek,jack@seatgeek.com,2026-04-10,delivered
+Jack Groetzinger,Co-founder & CEO,SeatGeek,jgroetzinger@seatgeek.com,2026-04-10,BOUNCED
+Russ D'Souza,Co-founder,SeatGeek,russ@seatgeek.com,2026-04-10,delivered
+Russ D'Souza,Co-founder,SeatGeek,rdsouza@seatgeek.com,2026-04-10,BOUNCED
+Jeremiah Daly,Co-founder & GP,Elephant Ventures,jeremiah@elephantvc.com,2026-04-10,BOUNCED
+Jeremiah Daly,Co-founder & GP,Elephant Ventures,jdaly@elephantvc.com,2026-04-10,BOUNCED
+Nico Sell,Co-founder,Wickr,nico@wickr.com,2026-04-10,BOUNCED
+Nico Sell,Co-founder,Wickr,nsell@wickr.com,2026-04-10,BOUNCED
+Tony Florence,Partner,NEA,tony.florence@nea.com,2026-04-10,BOUNCED
+Tony Florence,Partner,NEA,tflorence@nea.com,2026-04-10,delivered
+Michael Carusi,General Partner,Lightstone Ventures,michael.carusi@lightstonevc.com,2026-04-10,BOUNCED
+Michael Carusi,General Partner,Lightstone Ventures,mcarusi@lightstonevc.com,2026-04-10,delivered
+Brian Goldner,Former CEO,Hasbro,brian.goldner@hasbro.com,2026-04-10,delivered
+Brian Goldner,Former CEO,Hasbro,bgoldner@hasbro.com,2026-04-10,delivered
+Henry Paulson,Former Treasury Sec,Paulson Institute,henry.paulson@paulson.com,2026-04-10,delivered
+Tom Purcell,Co-founder,Alua Capital,tom.purcell@aluacapital.com,2026-04-10,delivered
+Tracey Pettengill Turner,Founder & Chair,Copia Global,tracey@copia.com,2026-04-10,BOUNCED
+Tracey Pettengill Turner,Founder & Chair,Copia Global,tturner@copia.com,2026-04-10,BOUNCED
+Sanjay Gupta,Exec,Persona,sanjay@persona.com,2026-04-10,delivered
+Sanjay Gupta,Exec,Persona,sgupta@persona.com,2026-04-10,delivered
+Ashie Bhandiwad,Founder,StemChef,ashie@stemchef.com,2026-04-10,delivered
+Ashie Bhandiwad,Founder,StemChef,abhandiwad@stemchef.com,2026-04-10,BOUNCED
+Alastair Borthwick,CFO,Bank of America,alastair.borthwick@bofa.com,2026-04-10,delivered
+Roger Lynch,Global CEO,Conde Nast,roger.lynch@condenast.com,2026-04-10,delivered
+Roger Lynch,Global CEO,Conde Nast,rlynch@condenast.com,2026-04-10,delivered
+Daniel Revers,Managing Partner,ArcLight Capital,daniel.revers@arclightcapital.com,2026-04-10,BOUNCED
+Daniel Revers,Managing Partner,ArcLight Capital,drevers@arclightcapital.com,2026-04-10,delivered
+Kim Shaw,Global Co-Head Prime Brokerage,Morgan Stanley,kim.shaw@morganstanley.com,2026-04-10,delivered
+Cem Sibay,VP Corp Dev,Amazon,cem.sibay@amazon.com,2026-04-10,delivered
+Cem Sibay,VP Corp Dev,Amazon,csibay@amazon.com,2026-04-10,delivered
+Brian Kim,CEO,Mission Bio,brian.kim@missionbio.com,2026-04-10,delivered
+Brian Kim,CEO,Mission Bio,bkim@missionbio.com,2026-04-10,BOUNCED
+Tara Pyle,SVP,L'Oreal,tara.pyle@loreal.com,2026-04-10,delivered
+Tara Pyle,SVP,L'Oreal,tpyle@loreal.com,2026-04-10,BOUNCED
+Elizabeth Jimenez,SVP Strategic Risk,Citi,elizabeth.jimenez@citi.com,2026-04-10,delivered
+Brad Hu,CRO,State Street,brad.hu@statestreet.com,2026-04-10,delivered
+Brad Hu,CRO,State Street,bhu@statestreet.com,2026-04-10,delivered
+Lucile Chung,Chief of Staff,YouTube,lucile.chung@youtube.com,2026-04-10,BOUNCED
+Lucile Chung,Chief of Staff,YouTube,lchung@youtube.com,2026-04-10,BOUNCED
+Kevin Demoff,COO,LA Rams,kevin.demoff@rams.com,2026-04-10,delivered
+Kevin Demoff,COO,LA Rams,kdemoff@rams.com,2026-04-10,delivered
+Dave Girouard,Founder & CEO,Upstart,dave.girouard@upstart.com,2026-04-10,delivered
+Dave Girouard,Founder & CEO,Upstart,dave@upstart.com,2026-04-10,delivered
+Mike Collins,CEO,Alumni Ventures,mike.collins@av.vc,2026-04-10,delivered
+Mike Collins,CEO,Alumni Ventures,mcollins@av.vc,2026-04-10,BOUNCED
+Ed Warren,Co-founder,Zippity,ed@zippity.com,2026-04-10,delivered
+Ed Warren,Co-founder,Zippity,ewarren@zippity.com,2026-04-10,BOUNCED
