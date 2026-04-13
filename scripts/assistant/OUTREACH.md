@@ -7,10 +7,53 @@ Dartmouth undergraduate building Engrams — an AI tool that compiles scattered 
 ## Outreach rules
 
 ### Targets
-- **Roles:** Head of Engineering, VP Engineering, CTO, Chief of Staff, Head of Research, Research Director, Head of Product, VP Operations, Director of Operations, Managing Partner, General Counsel, Head of People, VP Strategy, Director of Business Intelligence, Head of Documentation, Head of Developer Experience, VP Legal, Knowledge Manager, Director of Competitive Intelligence, Head of Investor Relations, Portfolio Manager, Deal Lead
-- **Industries:** B2B SaaS, consulting (LEK, Oliver Wyman, Kearney, FTI), law firms, VC, PE, hedge funds, family offices, wealth management, commercial real estate, biotech/pharma research, defense/intel contractors, policy think tanks, crypto/web3 research, professional services, insurance, healthcare admin, accounting, architecture/engineering firms
+- **Roles (prioritized):** CTO, VP Engineering, Head of Engineering, Head of Product, VP Operations, Director of Operations, Chief of Staff, Head of Research, Research Director, VP Strategy, Director of Business Intelligence, Head of Documentation, Head of Developer Experience, Knowledge Manager, Director of Competitive Intelligence, COO, CPO
+- **Industries (highest priority, most knowledge-scattered):**
+  - Boutique M&A advisory firms (deal teams drown in scattered research, memos, and precedent transactions)
+  - Paid newsletter writers and research publishers (their entire business is organizing and synthesizing knowledge)
+  - Research analysts and equity research firms (scattered notes, models, and source materials)
+  - Competitive intelligence firms (CI teams aggregate information from dozens of fragmented sources)
+  - Policy and regulatory intelligence firms (tracking scattered regulatory changes across jurisdictions)
+  - Market research boutiques (synthesizing qualitative and quantitative research from many sources)
+  - B2B SaaS (particularly knowledge management, data, and productivity tools)
+  - Defense tech and intelligence contractors
+  - Biotech/pharma research
+  - Healthtech
+  - Consulting firms (knowledge/ops roles only, not partner classes)
+- **Do NOT mass-email law firm partner classes or consulting partner classes.** These are not the target user. Only email people in knowledge-heavy operational roles.
+- **Quality over volume.** Every recipient should plausibly have a scattered knowledge problem. Prioritize people who research, analyze, synthesize, or manage information as their core job.
 - **Company size:** 50-500 employees
-- **Priority:** STRICT preference for Dartmouth and Tuck alumni. Before adding anyone to an outreach batch, verify their Dartmouth/Tuck affiliation via LinkedIn, alumni directories, bio pages, or credible sources. Only fall back to non-alumni targets when alumni options are exhausted for a given role/industry. When in doubt, skip.
+- **Priority:** 
+  1. Dartmouth and Tuck alumni (highest priority)
+  2. Ivy League graduates (Harvard, Yale, Princeton, Columbia, Penn, Brown, Cornell) at companies with high email deliverability
+  3. Non-alumni at mid-size firms (50-500 employees) in target industries where email patterns are known to work
+- **Diversity rule:** No more than 20% of a batch (100 of 500) should go to any single industry. Spread sends across B2B SaaS, defense tech, biotech, consulting, PE/VC ops, healthtech, and other target industries. Do NOT repeat the law firm partner class strategy.
+- **Relevance rule:** Every recipient should plausibly benefit from a tool that organizes scattered company knowledge. Best targets: CTOs who manage technical documentation, Heads of Product who deal with cross-team knowledge, VPs of Operations who handle process documentation, and knowledge management leaders. Worst targets: litigators, salespeople, and pure finance roles with no operational component.
+- **Confirmed-deliverable companies and their email patterns:**
+  | Company | Domain | Pattern | Confirmed |
+  |---------|--------|---------|-----------|
+  | L.E.K. Consulting | lek.com | f.last@ (e.g. j.rutan@lek.com) | Yes, 100+ delivered |
+  | Oliver Wyman | oliverwyman.com | first.last@ | Yes, 80+ delivered |
+  | Goodwin Procter | goodwinprocter.com | flast@ (e.g. astemlar@) | Yes, 60+ delivered |
+  | Wilson Elser | wilsonelser.com | flast@ (e.g. rgordon@) | Yes, 40+ delivered |
+  | Kearney | kearney.com | first.last@ or b.last@ | Yes, 15+ delivered |
+  | Foley & Lardner | foley.com | flast@ (e.g. clogullo@) | Yes, 10+ delivered |
+  | Morgan Lewis | morganlewis.com | first.last@ or flast@ | Yes, verified |
+  | Brightstar Capital | brightstarcp.com | flast@ | Yes, verified |
+  | Edison Partners | edisonpartners.com | flast@ | Yes, verified |
+  | THL Partners | thl.com | flast@ | Yes, verified |
+  | Align Capital Partners | aligncp.com | flast@ | Yes, verified |
+  | Fundstrat | fundstrat.com | first.last@ | Yes, verified |
+  | Chainalysis | chainalysis.com | first.last@ | Yes, verified |
+  | Arcus Biosciences | arcusbio.com | flast@ | Yes, verified |
+  | Inovalon | inovalon.com | first.last@ or flast@ | Yes, verified |
+  | Shield AI | shield.ai | first.last@ (accept_all) | Yes |
+  | Anduril | anduril.com | first.last@ | Yes, delivered |
+  | Indegene | indegene.com | first.last@ or tarun.mathur@ | Yes |
+- **Confirmed-bouncing companies (do NOT send):**
+  Huron Consulting, FTI Consulting, Alvarez & Marsal, Rebellion Defense, Recorded Future, Formation Bio, Xaira Therapeutics, Harbor Global, Simon-Kucher, Roland Berger, Summit Partners, Norwest Venture Partners, Corient, Guidepost Growth Equity, Olympus Partners, D.E. Shaw, Lone Pine Capital, Morgan Stanley, Goldman Sachs, BDT & MSD, all big banks, all mega hedge funds, YouTube/Google, Amazon, ServiceNow, Smartsheet
+- **Best strategy for volume:** Scrape official partner/promotion announcements from confirmed-deliverable companies using WebFetch. These yield 30-60 verified names per company with known email patterns. This is far more efficient than guessing both person and pattern.
+- **Avoid:** Fortune 500, big banks, mega hedge funds, and large tech companies. These reject pattern-guessed emails.
 
 ### Email format
 - Subject: 5 words max, reference their company or role
