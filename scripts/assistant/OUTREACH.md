@@ -44,18 +44,25 @@ If the brand IS named prominently in every result, **don't send**. They don't ha
 ### Email format
 
 - **Subject:** `Quick question, {Brand Name}` — exactly that, no variations
-- **Body:** under 90 words. Structure:
-  1. One-line intro: Dartmouth undergrad helping DTC brands prepare for agentic commerce
-  2. The evidence: "I asked [LLM] '[verbatim prompt]' and it recommended [competitor list]. {Brand} wasn't mentioned." (or ranked Nth, or only mentioned in a follow-up, etc.)
-  3. One sentence framing why this matters (buyers are starting here, not Google)
-  4. Ask for a 15-min call in the next week
+- **Body template** (use this exact structure, don't paraphrase):
+
+```
+Hi {first name},
+
+I searched up {category descriptor — e.g. "brands that sell magnesium supplements for sleep"} on ChatGPT, Perplexity, etc. {Brand} didn't show up. I'm Armaan, a Dartmouth student working on how AI platforms decide which products to recommend to users. Would love 15 minutes to show you what I found. Are you free anytime soon?
+
+Thanks,
+Armaan
+```
+
 - Sign off with `Thanks,` then `Armaan` on the next line
 - Plain text. No em dashes. No exclamation marks. No buzzwords ("synergy", "leverage", "solutions"). No "I noticed your amazing brand". No hype.
-- Always include line breaks between greeting, evidence, framing, ask, and sign-off
+- Keep the line breaks: blank line after greeting, blank line before sign-off.
+- The {category descriptor} should sound like a real buyer's query, not a marketing taxonomy. "brands that sell non-toxic deodorant for sensitive skin" beats "the personal care category."
 
 ### Tone
 
-Direct, useful, slightly clinical. The evidence does the emotional work — the writing should not. A founder reading it should think "wait, is that real?" and check for themselves. That's the whole funnel.
+Direct, slightly clinical. Three sentences in the body; the absence does the emotional work. A founder reading it should think "wait, is that real?" and reply to find out.
 
 ### Example email
 
@@ -64,9 +71,7 @@ Direct, useful, slightly clinical. The evidence does the emotional work — the 
 **Body:**
 Hi John,
 
-I'm a Dartmouth undergrad helping DTC brands prepare for the era of agentic commerce. I asked ChatGPT "best electrolyte mix for daily hydration without sugar" and it recommended LMNT, Liquid IV, and Ultima. Hydrant didn't come up. Same prompt in Perplexity returned LMNT and Cure — also no Hydrant.
-
-Buyers are starting to ask AI agents these questions before they ever land on a brand site. Worth a 15-min call this week to walk through what I found?
+I searched up brands that sell electrolyte mixes for daily hydration without sugar on ChatGPT, Perplexity, etc. Hydrant didn't show up. I'm Armaan, a Dartmouth student working on how AI platforms decide which products to recommend to users. Would love 15 minutes to show you what I found. Are you free anytime soon?
 
 Thanks,
 Armaan
