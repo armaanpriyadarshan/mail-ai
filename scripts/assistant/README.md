@@ -162,7 +162,9 @@ gog gmail send --reply-to-message-id <messageId> --quote --to someone@example.co
 
 ## Outreach campaign
 
-See [OUTREACH.md](OUTREACH.md) for the full Engrams cold outreach playbook — target roles, industries, email format, tone, and workflow.
+See [OUTREACH.md](OUTREACH.md) for the active DTC agentic-commerce outreach playbook — target brands, LLM-evidence personalization workflow, email format, tone, and bounce handling.
+
+The prior Engrams campaign log is archived at `engrams-outreach-log.csv`. New campaign log is `outreach-log.csv` (columns: `name,role,brand,domain,email,date_sent,verified,llm_evidence`).
 
 ---
 

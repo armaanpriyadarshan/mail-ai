@@ -1,132 +1,134 @@
-# Engrams Cold Outreach Playbook
+# DTC Agentic Commerce Outreach Playbook
 
 ## Who is Armaan
 
-Dartmouth undergraduate building Engrams — an AI tool that compiles scattered company knowledge into organized, queryable information.
+Dartmouth undergrad helping DTC brands prepare for the era of agentic commerce — where buyers increasingly ask AI agents (ChatGPT, Perplexity, Claude, Gemini) for product recommendations instead of searching Google or scrolling Instagram. Brands that don't show up in those answers lose discovery they never knew they had.
+
+## The pitch (short version)
+
+The discovery surface is shifting from search and social to AI agents. When a buyer asks ChatGPT "best electrolyte drink for endurance athletes" or "skincare for sensitive combination skin in my 30s," a small set of brands get named. Most DTC brands have never checked whether they're in that set, and most of them aren't. The cold message exists to make that fact visceral.
 
 ## Outreach rules
 
 ### Targets
-- **Roles (prioritized):** CTO, VP Engineering, Head of Engineering, Head of Product, VP Operations, Director of Operations, Chief of Staff, Head of Research, Research Director, VP Strategy, Director of Business Intelligence, Head of Documentation, Head of Developer Experience, Knowledge Manager, Director of Competitive Intelligence, COO, CPO
-- **Industries (highest priority, most knowledge-scattered):**
-  - Boutique M&A advisory firms (deal teams drown in scattered research, memos, and precedent transactions)
-  - Paid newsletter writers and research publishers (their entire business is organizing and synthesizing knowledge)
-  - Research analysts and equity research firms (scattered notes, models, and source materials)
-  - Competitive intelligence firms (CI teams aggregate information from dozens of fragmented sources)
-  - Policy and regulatory intelligence firms (tracking scattered regulatory changes across jurisdictions)
-  - Market research boutiques (synthesizing qualitative and quantitative research from many sources)
-  - B2B SaaS (particularly knowledge management, data, and productivity tools)
-  - Defense tech and intelligence contractors
-  - Biotech/pharma research
-  - Healthtech
-  - Consulting firms (knowledge/ops roles only, not partner classes)
-- **Do NOT mass-email law firm partner classes or consulting partner classes.** These are not the target user. Only email people in knowledge-heavy operational roles.
-- **Quality over volume.** Every recipient should plausibly have a scattered knowledge problem. Prioritize people who research, analyze, synthesize, or manage information as their core job.
-- **Company size:** 50-500 employees
-- **Priority:** 
-  1. Dartmouth and Tuck alumni (highest priority)
-  2. Ivy League graduates (Harvard, Yale, Princeton, Columbia, Penn, Brown, Cornell) at companies with high email deliverability
-  3. Non-alumni at mid-size firms (50-500 employees) in target industries where email patterns are known to work
-- **Diversity rule:** No more than 20% of a batch (100 of 500) should go to any single industry. Spread sends across B2B SaaS, defense tech, biotech, consulting, PE/VC ops, healthtech, and other target industries. Do NOT repeat the law firm partner class strategy.
-- **Relevance rule:** Every recipient should plausibly benefit from a tool that organizes scattered company knowledge. Best targets: CTOs who manage technical documentation, Heads of Product who deal with cross-team knowledge, VPs of Operations who handle process documentation, and knowledge management leaders. Worst targets: litigators, salespeople, and pure finance roles with no operational component.
-- **Confirmed-deliverable companies and their email patterns:**
-  | Company | Domain | Pattern | Confirmed |
-  |---------|--------|---------|-----------|
-  | L.E.K. Consulting | lek.com | f.last@ (e.g. j.rutan@lek.com) | Yes, 100+ delivered |
-  | Oliver Wyman | oliverwyman.com | first.last@ | Yes, 80+ delivered |
-  | Goodwin Procter | goodwinprocter.com | flast@ (e.g. astemlar@) | Yes, 60+ delivered |
-  | Wilson Elser | wilsonelser.com | flast@ (e.g. rgordon@) | Yes, 40+ delivered |
-  | Kearney | kearney.com | first.last@ or b.last@ | Yes, 15+ delivered |
-  | Foley & Lardner | foley.com | flast@ (e.g. clogullo@) | Yes, 10+ delivered |
-  | Morgan Lewis | morganlewis.com | first.last@ or flast@ | Yes, verified |
-  | Brightstar Capital | brightstarcp.com | flast@ | Yes, verified |
-  | Edison Partners | edisonpartners.com | flast@ | Yes, verified |
-  | THL Partners | thl.com | flast@ | Yes, verified |
-  | Align Capital Partners | aligncp.com | flast@ | Yes, verified |
-  | Fundstrat | fundstrat.com | first.last@ | Yes, verified |
-  | Chainalysis | chainalysis.com | first.last@ | Yes, verified |
-  | Arcus Biosciences | arcusbio.com | flast@ | Yes, verified |
-  | Inovalon | inovalon.com | first.last@ or flast@ | Yes, verified |
-  | Shield AI | shield.ai | first.last@ (accept_all) | Yes |
-  | Anduril | anduril.com | first.last@ | Yes, delivered |
-  | Indegene | indegene.com | first.last@ or tarun.mathur@ | Yes |
-- **Confirmed-bouncing companies (do NOT send):**
-  Huron Consulting, FTI Consulting, Alvarez & Marsal, Rebellion Defense, Recorded Future, Formation Bio, Xaira Therapeutics, Harbor Global, Simon-Kucher, Roland Berger, Summit Partners, Norwest Venture Partners, Corient, Guidepost Growth Equity, Olympus Partners, D.E. Shaw, Lone Pine Capital, Morgan Stanley, Goldman Sachs, BDT & MSD, all big banks, all mega hedge funds, YouTube/Google, Amazon, ServiceNow, Smartsheet
-- **Best strategy for volume:** Scrape official partner/promotion announcements from confirmed-deliverable companies using WebFetch. These yield 30-60 verified names per company with known email patterns. This is far more efficient than guessing both person and pattern.
-- **Avoid:** Fortune 500, big banks, mega hedge funds, and large tech companies. These reject pattern-guessed emails.
+
+- **Roles (prioritized):** Founder, Co-Founder, CEO, CMO, Head of Growth, Head of Brand, VP Marketing, Head of Ecommerce, Head of Digital. Founder-led brands first — they feel category positioning anxiety the most.
+- **Brand profile:**
+  - DTC consumer brands selling physical product (food/bev, supplements, beauty, skincare, apparel, home, pet, baby, wellness, fitness gear, kitchen)
+  - $5M–$200M revenue range — big enough to feel competitive pressure, small enough that the founder reads their own inbox
+  - Sells primarily through Shopify, their own site, and/or Amazon — not pure wholesale, not pure marketplace
+  - Has a real category they compete in (i.e. a buyer would ask an AI agent "best X" and the brand should plausibly be in the answer)
+- **Avoid:**
+  - SaaS, B2B, services, agencies, consultancies — wrong category entirely
+  - Mega-brands (Nike, Allbirds, Glossier, Warby Parker tier) — they have GEO teams already
+  - Pre-revenue or hobby brands — no urgency
+  - Marketplaces, aggregators, retailers reselling other brands
+  - Anything where AI discovery isn't a plausible buying motion
+
+### The personalization is the pitch
+
+Every email demonstrates the problem before the recipient even replies. Workflow per prospect:
+
+1. Identify the brand's primary category and 2–3 buyer personas
+2. Pick 2–3 buyer prompts a real customer would ask an AI agent. Prefer specific over generic. Examples:
+   - "best magnesium supplement for sleep"
+   - "non-toxic deodorant for sensitive skin under $20"
+   - "best dog food for senior labs with allergies"
+3. Run those prompts in **at least two** LLMs (ChatGPT, Perplexity, Claude, or Gemini)
+4. Record verbatim what brands the agent recommended
+5. Note whether the prospect's brand was named, ranked low, or absent. Note which competitors got named instead.
+6. The email references that result directly — not "I think you might have a problem" but "I asked ChatGPT [exact prompt] and it recommended X, Y, Z. You weren't there."
+
+If the brand IS named prominently in every result, **don't send**. They don't have the problem yet, and the message will land flat. Move on.
 
 ### Email format
-- Subject: 5 words max, reference their company or role
-- Body: under 50 words
-- Introduce Armaan as a Dartmouth undergrad building an AI tool that compiles scattered company knowledge into something organized and queryable
-- Express curiosity about their perspective given their role and company
-- Do NOT posit how the tool could help their specific company. Just describe what it does.
-- Ask if they're free for a call anytime in the next week
-- Sign off with "Thanks," then "Armaan" on the next line
-- Do NOT use em dashes anywhere
-- Do NOT be peppy or forced about Dartmouth connections. If they're an alum, don't call it out explicitly. The Dartmouth mention in the intro is enough.
+
+- **Subject:** `Quick question, {Brand Name}` — exactly that, no variations
+- **Body:** under 90 words. Structure:
+  1. One-line intro: Dartmouth undergrad helping DTC brands prepare for agentic commerce
+  2. The evidence: "I asked [LLM] '[verbatim prompt]' and it recommended [competitor list]. {Brand} wasn't mentioned." (or ranked Nth, or only mentioned in a follow-up, etc.)
+  3. One sentence framing why this matters (buyers are starting here, not Google)
+  4. Ask for a 15-min call in the next week
+- Sign off with `Thanks,` then `Armaan` on the next line
+- Plain text. No em dashes. No exclamation marks. No buzzwords ("synergy", "leverage", "solutions"). No "I noticed your amazing brand". No hype.
+- Always include line breaks between greeting, evidence, framing, ask, and sign-off
 
 ### Tone
-Brief, respectful, understated. A student genuinely curious, not pitching anything. No jargon. No buzzwords. No exclamation marks. No em dashes. Plain and human.
 
-### Email finding workflow
+Direct, useful, slightly clinical. The evidence does the emotional work — the writing should not. A founder reading it should think "wait, is that real?" and check for themselves. That's the whole funnel.
 
-Hunter.io has limited credits. Use it sparingly. Prefer confident guesses over burning API calls.
+### Example email
 
-**Step 1: Find the email**
-1. Use Hunter.io to guess: `python3 scripts/assistant/guess-email.py "First Last" domain.com`
-2. If Hunter is rate-limited or returns nothing, fall back to common patterns:
+**Subject:** Quick question, Hydrant
+
+**Body:**
+Hi John,
+
+I'm a Dartmouth undergrad helping DTC brands prepare for the era of agentic commerce. I asked ChatGPT "best electrolyte mix for daily hydration without sugar" and it recommended LMNT, Liquid IV, and Ultima. Hydrant didn't come up. Same prompt in Perplexity returned LMNT and Cure — also no Hydrant.
+
+Buyers are starting to ask AI agents these questions before they ever land on a brand site. Worth a 15-min call this week to walk through what I found?
+
+Thanks,
+Armaan
+
+---
+
+## Workflow
+
+### Step 1: Find the brand and the founder
+- Source brands from: ProductHunt, Shopify Top Stores, Glossy / Modern Retail / Retail Brew newsletters, DTC Twitter, /r/DTC, Crunchbase consumer filters, "fastest growing DTC brands" lists
+- Find the founder via the brand's About page, LinkedIn, or press coverage. Confirm they're still active at the company.
+
+### Step 2: Run the LLM queries
+- Use ChatGPT and Perplexity at minimum. Add Claude and Gemini if the result in the first two is ambiguous.
+- Record: the exact prompt, which LLM, the brands that got recommended, the prospect brand's position (named / not named / mentioned only when prompted again).
+- If the brand shows up well in every query, skip them — they aren't the target.
+
+### Step 3: Find the email
+1. Try Hunter: `python3 scripts/assistant/guess-email.py "First Last" domain.com`
+2. If Hunter is rate-limited, fall back to common patterns:
    - first@domain.com
    - first.last@domain.com
    - firstlast@domain.com
    - flast@domain.com
-   - first.l@domain.com
 
-**Step 2: Verify before sending**
-1. Always verify with Hunter when credits are available: `python3 scripts/assistant/verify-email.py guessed@domain.com`
-2. Only send to addresses that come back as "valid" or "accept_all"
-3. If Hunter credits are exhausted, send to the top 2 most likely patterns
+### Step 4: Verify before sending
+1. When credits exist: `python3 scripts/assistant/verify-email.py guessed@domain.com`
+2. Only send to `valid` or `accept_all`
+3. If credits are out, send to the top 2 most likely patterns
 
-**Step 3: Send**
-`gog gmail send --to verified@domain.com --subject "..." --body "..."`
+### Step 5: Send
+```
+gog gmail send --to verified@domain.com --subject "Quick question, {Brand}" --body "..."
+```
 
-**Step 4: Retry on bounce (up to 5 attempts per person)**
-When an email bounces, Gmail receives a reply from `mailer-daemon@googlemail.com` (Mail Delivery Subsystem) with the subject `Delivery Status Notification (Failure)`. These land in the inbox and are the authoritative signal that an address failed — don't guess at deliverability, read the bounces.
-
-After sending a batch, wait ~30 seconds for bounces to arrive, then check:
+### Step 6: Retry on bounce (up to 5 attempts per founder)
+Bounces come from `mailer-daemon@googlemail.com` with subject `Delivery Status Notification (Failure)`. After a batch, wait ~30s and check:
 ```bash
 gog gmail messages search 'from:mailer-daemon@googlemail.com subject:"Delivery Status Notification"' --max 200
 ```
 
-To extract the failed recipient from a specific bounce, read the message and grep for the email address:
-```bash
-gog gmail get <messageId> | grep -oE '[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+' | grep -v dartmouth.edu | grep -v googlemail.com | grep -v mailer-daemon
-```
+For each bounce: try the next pattern, re-send. Give up after 5 patterns and log as `unreachable`.
 
-For each bounced address:
-1. Extract the failed recipient from the bounce message
-2. Try the next pattern from the list (first, first.last, firstlast, flast, first.l)
-3. Re-send to the new pattern
-4. Repeat until one lands OR you've tried 5 distinct patterns for that person
-5. After 5 failed attempts, give up on that person and log them as `unreachable`
+### Step 7: Log
+Append to `scripts/assistant/outreach-log.csv` with columns:
+`name,role,brand,domain,email,date_sent,verified,llm_evidence`
 
-**Step 5: Log**
-After each send, append the contact to `scripts/assistant/outreach-log.csv` with columns:
-`name,role,company,email,date_sent,verified`
+`llm_evidence` is a short tag like `chatgpt-absent-perplexity-absent` or `chatgpt-rank4-perplexity-named`. Enough to know later why we sent.
 
-After bounce checks, update the `verified` column:
-- `BOUNCED` — the address bounced
-- `delivered` — sent and no bounce received
-- `unreachable` — all 5 patterns exhausted
+After bounce checks, update `verified`:
+- `BOUNCED` — bounced
+- `delivered` — sent, no bounce
+- `unreachable` — 5 patterns exhausted
 
-### Example email
+---
 
-**Subject:** Quick question, Oliver Wyman
+## Hard rules
 
-**Body:**
-Hi Sarah,
-
-I'm a Dartmouth undergrad building an AI tool that compiles a company's scattered knowledge into something organized and queryable. Curious to hear your perspective as a director of knowledge management at Oliver Wyman. Would you be free for a call anytime in the next week?
-
-Thanks,
-Armaan
+- **No sending without LLM evidence.** If you didn't run the queries, you don't have the email. The personalization IS the campaign.
+- **No sending to brands that are already winning AI discovery.** They'll think we're wrong and ignore us.
+- **No duplicate sends.** Check `outreach-log.csv` for the brand and email before queuing.
+- **No mega-brands, no B2B, no agencies.** DTC consumer brands selling physical product, $5M–$200M, founder-led.
+- **No em dashes. No exclamation marks. No buzzwords. No flattery.**
+- **Subject line is always exactly:** `Quick question, {Brand Name}`
+- **Prior Engrams sends are archived in `engrams-outreach-log.csv`.** That campaign is closed. Do not reference Engrams in any new outreach.
